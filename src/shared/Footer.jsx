@@ -1,27 +1,28 @@
-import { FaLinkedinIn, FaFacebookF, FaYoutube } from "react-icons/fa";
+import React from 'react';
 import ZapShiftLogo from "./ZapShiftLogo";
-import { NavLink } from "react-router";
+import { FaLinkedinIn, FaFacebookF, FaYoutube } from "react-icons/fa";
+import { Link, NavLink } from "react-router";
 import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
 
-      const FootLinks = <>
-        <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/services'>Services</NavLink></li>
-        <li><NavLink to='/coverage'>Coverage</NavLink></li>
-        <li><NavLink to='/about-us'>About Us</NavLink></li>
-        <li><NavLink to='/Pricing'>Pricing</NavLink></li>
-        <li><NavLink to='/blog'>Blog</NavLink></li>
-        <li><NavLink to='/contact'>Contact</NavLink></li>
-    </>
+  const FootLinks = <>
+    <li><NavLink to='/'>Home</NavLink></li>
+    <li><NavLink to='/services'>Services</NavLink></li>
+    <li><NavLink to='/coverage'>Coverage</NavLink></li>
+    <li><NavLink to='/about-us'>About Us</NavLink></li>
+    <li><NavLink to='/Pricing'>Pricing</NavLink></li>
+    <li><NavLink to='/blog'>Blog</NavLink></li>
+    <li><NavLink to='/contact'>Contact</NavLink></li>
+  </>
 
   return (
-    <footer className="bg-linear-to-b from-black to-neutral-900 text-white rounded-4xl">
+    <footer className="lg:w-11/12 mx-auto bg-linear-to-b from-black to-neutral-900 text-white lg:rounded-4xl">
       <div className="max-w-7xl mx-auto px-6 py-16 text-center">
 
         {/* Logo / Brand */}
         <div className="flex justify-center mb-4">
-            <ZapShiftLogo/>
+          <ZapShiftLogo />
         </div>
 
         {/* Tagline */}
@@ -32,24 +33,42 @@ const Footer = () => {
         </p>
 
         {/* Navigation */}
-        <ul className="flex justify-center gap-6 mb-10 text-sm">
+        <ul className="
+          flex flex-wrap justify-center gap-x-6 gap-y-3 
+          mb-10 text-sm
+        ">
           {FootLinks}
         </ul>
 
         {/* Social Icons */}
         <div className="flex justify-center gap-4">
-          <a className="btn btn-circle btn-outline btn-sm text-white">
+          <Link
+            to='https://www.facebook.com/shadshs91'
+            className="btn btn-circle btn-outline btn-sm text-white"
+          >
             <FaFacebookF />
-          </a>
-          <a className="btn btn-circle btn-outline btn-sm text-white">
+          </Link>
+
+          <Link
+            to='https://x.com/shadshs91'
+            className="btn btn-circle btn-outline btn-sm text-white"
+          >
             <FaXTwitter />
-          </a>
-          <a className="btn btn-circle btn-outline btn-sm text-white">
+          </Link>
+
+          <Link
+            to='https://www.linkedin.com/in/md-sahadot-hossen-shad-838251345/'
+            className="btn btn-circle btn-outline btn-sm text-white"
+          >
             <FaLinkedinIn />
-          </a>
-          <a className="btn btn-circle btn-outline btn-sm text-white">
+          </Link>
+
+          <Link
+            to='https://www.youtube.com/@shad9156'
+            className="btn btn-circle btn-outline btn-sm text-white"
+          >
             <FaYoutube />
-          </a>
+          </Link>
         </div>
 
       </div>

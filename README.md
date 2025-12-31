@@ -1,4 +1,4 @@
-# Pro Fast Resources
+# Zap Shift Resources
 
 Welcome to **Pro Fast Resources**!  
 A curated collection of tools, guides, and assets for developing robust parcel management systems.
@@ -60,7 +60,7 @@ flowchart TD
 
 ---
 
-# <u>Pro-Fast </u>
+# <u>Zap-Shift</u>
 
 ---
 

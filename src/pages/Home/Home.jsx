@@ -5,17 +5,22 @@ import OurServices from './components/OurServices';
 import TrustedBy from './components/TrustedBy';
 import Benefits from './components/Benefits';
 import FAQ from './components/FAQ';
+import BeMerchant from './components/BeMerchant';
+import Reviews from './components/Reviews/Reviews';
+
 
 const Home = () => {
     return (
-        <div className=''>
+        <section className=''>
             <Banner></Banner>
             <HowItWorks></HowItWorks>
             <OurServices></OurServices>
             <TrustedBy></TrustedBy>
             <Benefits></Benefits>
+            <BeMerchant></BeMerchant>
+            <Reviews></Reviews>
             <FAQ></FAQ>
-        </div>
+        </section>
     );
 };
 

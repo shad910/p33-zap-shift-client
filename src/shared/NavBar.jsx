@@ -34,7 +34,7 @@ const NavBar = () => {
 
                 {/* Desktop buttons (hidden on mobile) */}
                 <section className="hidden lg:flex space-x-3.5">
-                    <Link className='btn bg-[#CAEB66] text-black'>Sign in</Link>
+                    <Link to="/login" className='btn bg-[#CAEB66] text-black'>Sign in</Link>
 
                     <Link className='space-x-0'>
                         <button className='btn'>Be a Rider</button>
@@ -62,7 +62,7 @@ const NavBar = () => {
 
                         {/* Mobile-only actions */}
                         <li className="mt-2">
-                            <Link className="btn bg-[#CAEB66] text-black w-full">Sign in</Link>
+                            <Link to="/login"  className="btn bg-[#CAEB66] text-black w-full">Sign in</Link>
                         </li>
                         <li>
                             <Link className="btn w-full">Be a Rider</Link>

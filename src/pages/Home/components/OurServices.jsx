@@ -13,7 +13,7 @@ const services = [
         title: "Express & Standard Delivery",
         description:
             "We deliver parcels within 24–72 hours in Dhaka, Chittagong, Sylhet, Khulna, and Rajshahi. Express delivery available in Dhaka within 4–6 hours from pick-up to drop-off.",
-        icon: <FaShippingFast className="text-4xl text-primary" />,
+        icon: <FaShippingFast className="text-4xl text-secondary" />,
         animation: "fade-up",
     },
     {
@@ -21,7 +21,7 @@ const services = [
         title: "Nationwide Delivery",
         description:
             "We deliver parcels nationwide with home delivery in every district, ensuring your products reach customers within 48–72 hours.",
-        icon: <FaGlobeAsia className="text-4xl text-primary" />,
+        icon: <FaGlobeAsia className="text-4xl text-secondary" />,
         animation: "fade-up",
     },
     {
@@ -29,7 +29,7 @@ const services = [
         title: "Fulfillment Solution",
         description:
             "Customized services including inventory management, online order processing, packaging, and after-sales support.",
-        icon: <FaBoxes className="text-4xl text-primary" />,
+        icon: <FaBoxes className="text-4xl text-secondary" />,
         animation: "fade-up",
     },
     {
@@ -37,7 +37,7 @@ const services = [
         title: "Cash on Home Delivery",
         description:
             "100% cash on delivery anywhere in Bangladesh with guaranteed safety of your product.",
-        icon: <FaMoneyBillWave className="text-4xl text-primary" />,
+        icon: <FaMoneyBillWave className="text-4xl text-secondary" />,
         animation: "fade-up",
     },
     {
@@ -45,7 +45,7 @@ const services = [
         title: "Corporate Service / Contract in Logistics",
         description:
             "Customized corporate logistics services including warehouse and inventory management support.",
-        icon: <FaBuilding className="text-4xl text-primary" />,
+        icon: <FaBuilding className="text-4xl text-secondary" />,
         animation: "fade-up",
     },
     {
@@ -53,7 +53,7 @@ const services = [
         title: "Parcel Return",
         description:
             "Through our reverse logistics facility, customers can return or exchange products easily with online merchants.",
-        icon: <FaUndoAlt className="text-4xl text-primary" />,
+        icon: <FaUndoAlt className="text-4xl text-secondary" />,
         animation: "fade-up",
     },
 ];

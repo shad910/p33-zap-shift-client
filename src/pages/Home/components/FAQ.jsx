@@ -36,14 +36,14 @@ const FAQ = () => {
   };
 
   return (
-    <section className="py-16 bg-gray-50 px-4 md:px-0">
+    <section className="py-16  px-4 md:px-0">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12" data-aos="fade-down">
-          <h2 className="text-3xl md:text-4xl font-bold mb-3">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3">
             Frequently Asked Questions (FAQ)
           </h2>
-          <p className="text-gray-600 text-sm md:text-base">
+          <p className="text-xs sm:text-sm md:text-base text-gray-500">
             Enhance posture, mobility, and well-being effortlessly with Posture
             Pro. Achieve proper alignment, reduce pain, and strengthen your
             body with ease!
@@ -57,20 +57,20 @@ const FAQ = () => {
               key={index}
               className="border border-gray-200 rounded-lg overflow-hidden"
               data-aos="fade-up"
-              data-aos-delay={index * 150} // stagger effect
+              data-aos-delay={index * 150} 
               data-aos-offset="200"
             >
               <button
                 onClick={() => toggle(index)}
                 className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none"
               >
-                <span className="font-medium">{item.question}</span>
+                <span className="text-xs sm:text-sm md:text-base font-medium">{item.question}</span>
                 <span className="text-xl">
                   {activeIndex === index ? "-" : "+"}
                 </span>
               </button>
               {activeIndex === index && (
-                <div className="px-6 py-4 text-gray-700 bg-gray-50">
+                <div className="px-6 py-4 text-xs sm:text-sm md:text-base text-gray-700 bg-gray-50">
                   {item.answer}
                 </div>
               )}

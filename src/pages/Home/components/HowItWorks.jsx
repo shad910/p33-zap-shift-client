@@ -41,8 +41,8 @@ const HowItWorks = () => {
           data-aos="fade-down"
           data-aos-offset="200"
         >
-          <h2 className="text-4xl font-bold mb-3">How It Works</h2>
-          <p className="text-base text-gray-500">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3">How It Works</h2>
+          <p className="text-xs sm:text-sm md:text-base text-gray-500">
             Simple, fast, and reliable delivery process
           </p>
         </div>
@@ -59,10 +59,10 @@ const HowItWorks = () => {
             >
               <div className="card-body items-center text-center">
                 <div className="mb-4">{step.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">
+                <h3 className="text-sm md:text-base lg:text-xl font-semibold mb-2">
                   {step.title}
                 </h3>
-                <p className="text-sm text-gray-500">
+                <p className="text-xs md:text-sm text-gray-500">
                   {step.description}
                 </p>
               </div>

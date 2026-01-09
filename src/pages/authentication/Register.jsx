@@ -1,16 +1,31 @@
-import { FcGoogle } from "react-icons/fc";
+import React from "react";
 import { useForm } from "react-hook-form"
 import { Link } from "react-router";
+import useAuth from "../../hooks/useAuth";
+import SocialLogin from "./SocialLogin";
 
 const Register = () => {
+
+    const { createUser } = useAuth();
 
     const {
         register,
         handleSubmit,
+        formState: { errors },
     } = useForm();
 
     const onSubmit = data => {
-        console.log(data);
+
+        const { name, email, password } = data;
+
+        createUser(email, password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+            })
+            .catch(error => {
+                console.error(error);
+            });
     };
 
     return (
@@ -29,9 +44,10 @@ const Register = () => {
                     <input
                         type="text"
                         placeholder="Name"
-                        {...register("name")}
+                        {...register("name", { required: true })}
                         className="input input-bordered w-full"
                     />
+                    {errors.name?.type === 'required' && <p className="text-red-500 text-xs mt-1">Name is required</p>}
                 </div>
 
 
@@ -40,9 +56,10 @@ const Register = () => {
                     <input
                         type="email"
                         placeholder="Email"
-                        {...register("email")}
+                        {...register("email", { required: true })}
                         className="input input-bordered w-full"
                     />
+                    {errors.email?.type === 'required' && <p className="text-red-500 text-xs mt-1">Email is required</p>}
                 </div>
 
                 {/* Password */}
@@ -50,28 +67,28 @@ const Register = () => {
                     <input
                         type="password"
                         placeholder="Password"
-                        {...register("password")}
+                        {...register("password", { required: true, minLength: 6, maxLength: 16 })}
                         className="input input-bordered w-full"
                     />
+                    {errors.password?.type === 'required' && <p className="text-red-500 text-xs mt-1">Password is required</p>}
+                    {errors.password?.type === 'minLength' && <p className="text-red-500 text-xs mt-1">Password must be at least 6 characters</p>}
+                    {errors.password?.type === 'maxLength' && <p className="text-red-500 text-xs mt-1">Password must be at most 16 characters</p>}
                 </div>
 
                 {/* Login button */}
-                <button type="submit" className="btn btn-success w-full">
-                    Login
+                <button type="submit" className="btn btn-primary text-black w-full">
+                    Register Account
                 </button>
             </form>
 
             {/* Divider */}
             <div className="divider my-6">Or</div>
 
-            {/* Google login */}
-            <button className="btn btn-outline w-full flex items-center gap-2">
-                <FcGoogle size={20} />
-                Login with Google
-            </button>
+            {/* Social Login */}
+            <SocialLogin></SocialLogin>
 
             {/* Footer */}
-            <p className="text-center text-sm mt-6">
+            <p className="text-sm mt-6">
                 Already have an account? {" "}
                 <Link to="/login" className="link link-primary font-medium">
                     Login

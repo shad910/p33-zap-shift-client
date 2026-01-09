@@ -8,9 +8,9 @@ const ZapShiftLogo = () => {
             <img
                 src={logo}
                 alt="Zap Shift Logo"
-                className='h-9 mb-1'
+                className='h-8 md:h-9 mb-1'
             />
-            <h1 className='text-2xl font-extrabold'>Zap Shift</h1>
+            <h1 className='text-xl md:text-2xl font-extrabold'>Zap Shift</h1>
         </Link>
     );
 };

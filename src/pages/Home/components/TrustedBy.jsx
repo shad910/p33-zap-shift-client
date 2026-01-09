@@ -28,10 +28,10 @@ const TrustedBrands = () => {
           data-aos="fade-up"
           data-aos-offset="200"
         >
-          <h2 className="text-4xl font-bold mb-3">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3">
             We've helped thousands of sales teams
           </h2>
-          <p className="text-gray-500">
+          <p className="text-xs sm:text-sm md:text-base text-gray-500">
             Trusted by leading brands across industries
           </p>
         </div>

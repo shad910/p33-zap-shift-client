@@ -7,7 +7,7 @@ const AuthLayout = () => {
     return (
         <section className="bg-base-200 flex flex-col lg:flex-row">
             <div className='flex-1'>
-                <div className='py-6 pl-12'>
+                <div className='py-6 pl-5 md:pl-6 lg:pl-12'>
                     <ZapShiftLogo></ZapShiftLogo>
                 </div>
                 <br />

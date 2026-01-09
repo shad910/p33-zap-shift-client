@@ -1,12 +1,14 @@
-import { FcGoogle } from "react-icons/fc";
+import React from "react";
 import { useForm } from "react-hook-form"
 import { Link } from "react-router";
+import SocialLogin from "./SocialLogin";
 
 const Login = () => {
 
     const {
         register,
         handleSubmit,
+        formState: { errors },
     } = useForm();
 
     const onSubmit = data => {
@@ -29,9 +31,10 @@ const Login = () => {
                     <input
                         type="email"
                         placeholder="Email"
-                        {...register("email")}
+                        {...register("email", { required: true })}
                         className="input input-bordered w-full"
                     />
+                    {errors.email?.type === 'required' && <p className="text-red-500 text-xs mt-1">Email is required</p>}
                 </div>
 
                 {/* Password */}
@@ -39,9 +42,12 @@ const Login = () => {
                     <input
                         type="password"
                         placeholder="Password"
-                        {...register("password")}
+                        {...register("password", { required: true, minLength: 6, maxLength: 16 })}
                         className="input input-bordered w-full"
                     />
+                    {errors.password?.type === 'required' && <p className="text-red-500 text-xs mt-1">Password is required</p>}
+                    {errors.password?.type === 'minLength' && <p className="text-red-500 text-xs mt-1">Password must be at least 6 characters</p>}
+                    {errors.password?.type === 'maxLength' && <p className="text-red-500 text-xs mt-1">Password must be at most 16 characters</p>}
                 </div>
 
                 {/* Forgot password */}
@@ -52,7 +58,7 @@ const Login = () => {
                 </div>
 
                 {/* Login button */}
-                <button type="submit" className="btn btn-success w-full">
+                <button type="submit" className="btn btn-primary text-black w-full">
                     Login
                 </button>
             </form>
@@ -60,14 +66,11 @@ const Login = () => {
             {/* Divider */}
             <div className="divider my-6">Or</div>
 
-            {/* Google login */}
-            <button className="btn btn-outline w-full flex items-center gap-2">
-                <FcGoogle size={20} />
-                Login with Google
-            </button>
+            {/* Social Login */}
+            <SocialLogin></SocialLogin>
 
             {/* Footer */}
-            <p className="text-center text-sm mt-6">
+            <p className=" text-sm mt-6">
                 Don’t have an account?{" "}
                 <Link to="/register" className="link link-primary font-medium">
                     Register

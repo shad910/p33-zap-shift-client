@@ -1,5 +1,6 @@
+import './Footer.css'
 import React from 'react';
-import ZapShiftLogo from "./ZapShiftLogo";
+import ZapShiftLogo from '../ZapShiftLogo';
 import { FaLinkedinIn, FaFacebookF, FaYoutube } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
 import { FaXTwitter } from "react-icons/fa6";
@@ -7,7 +8,6 @@ import { FaXTwitter } from "react-icons/fa6";
 const Footer = () => {
 
   const FootLinks = <>
-    <li><NavLink to='/'>Home</NavLink></li>
     <li><NavLink to='/services'>Services</NavLink></li>
     <li><NavLink to='/coverage'>Coverage</NavLink></li>
     <li><NavLink to='/about-us'>About Us</NavLink></li>
@@ -17,7 +17,7 @@ const Footer = () => {
   </>
 
   return (
-    <footer className="lg:w-11/12 mx-auto bg-linear-to-b from-black to-neutral-900 text-white lg:rounded-2xl">
+    <footer id='footer' className="lg:w-11/12 mx-auto bg-linear-to-b from-black to-neutral-900 text-white lg:rounded-2xl">
       <div className="max-w-7xl mx-auto px-6 py-16 text-center">
 
         {/* Logo / Brand */}
@@ -26,7 +26,7 @@ const Footer = () => {
         </div>
 
         {/* Tagline */}
-        <p className="text-sm text-gray-400 max-w-xl mx-auto mb-8">
+        <p className="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto mb-8">
           Enjoy fast, reliable parcel delivery with real-time tracking and safe
           hands. From personal packages to business shipments — we deliver on time,
           every time.
@@ -35,7 +35,7 @@ const Footer = () => {
         {/* Navigation */}
         <ul className="
           flex flex-wrap justify-center gap-x-6 gap-y-3 
-          mb-10 text-sm
+          mb-10 text-xs sm:text-sm
         ">
           {FootLinks}
         </ul>

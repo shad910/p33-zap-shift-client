@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+footer a.active {
+    @apply text-[#CAEB66];
+}

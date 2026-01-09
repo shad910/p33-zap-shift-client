@@ -26,12 +26,12 @@ const benefitsData = [
 
 const Benefits = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 ">
       <div className="max-w-7xl mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-12" data-aos="fade-down">
-          <h2 className="text-4xl font-bold mb-3">Benefits</h2>
-          <p className="text-gray-600">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-3">Benefits</h2>
+          <p className="text-xs sm:text-sm md:text-base text-gray-600">
             Discover the advantages of choosing our reliable delivery services.
           </p>
         </div>
@@ -51,7 +51,7 @@ const Benefits = () => {
                 <img
                   src={benefit.image}
                   alt={benefit.title}
-                  className="w-48 h-48 md:w-48 md:h-48 rounded-lg shadow-lg object-cover"
+                  className="w-36 h-36 md:w-48 md:h-48 rounded-lg shadow-lg object-cover"
                 />
               </div>
 
@@ -63,8 +63,8 @@ const Benefits = () => {
 
               {/* Right Side - Text */}
               <div className="text-center md:text-left md:w-1/2">
-                <h3 className="text-2xl font-medium mb-4">{benefit.title}</h3>
-                <p className="text-gray-600">{benefit.description}</p>
+                <h3 className="text-base md:text-xl lg:text-2xl font-medium mb-4">{benefit.title}</h3>
+                <p className="text-xs sm:text-sm md:text-base text-gray-600">{benefit.description}</p>
               </div>
             </div>
           ))}

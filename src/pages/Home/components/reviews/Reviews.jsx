@@ -1,59 +1,31 @@
 import React, { useState, useEffect } from "react";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import customer from "../../../../assets/customer-top.png";
 import ReviewCard from "./ReviewCard";
 
-const reviews = [
-  {
-    id: "1",
-    userName: "John Doe",
-    review: "Smooth delivery and polite staff.",
-    user_photoURL: "https://randomuser.me/api/portraits/men/10.jpg",
-  },
-  {
-    id: "2",
-    userName: "Jane Smith",
-    review: "Took a bit longer than expected, but okay overall.",
-    user_photoURL: "https://randomuser.me/api/portraits/women/25.jpg",
-  },
-  {
-    id: "3",
-    userName: "Alex Brown",
-    review: "Excellent service! Fast and secure.",
-    user_photoURL: "https://randomuser.me/api/portraits/men/34.jpg",
-  },
-  {
-    id: "4",
-    userName: "Lisa White",
-    review: "Very responsive and professional.",
-    user_photoURL: "https://randomuser.me/api/portraits/women/12.jpg",
-  },
-  {
-    id: "5",
-    userName: "Nina Khan",
-    review: "Superb experience! Highly recommended.",
-    user_photoURL: "https://randomuser.me/api/portraits/women/8.jpg",
-  },
-];
-
 const Reviews = () => {
-  const [current, setCurrent] = useState(2);
+  const [reviews, setReviews] = useState([]);
+  const [current, setCurrent] = useState(0);
 
+  /* fetch reviews from public folder */
   useEffect(() => {
-    AOS.init({
-      duration: 700,
-      once: true,
-      easing: "ease-out-cubic",
-    });
+    fetch("/reviews.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setReviews(data);
+        setCurrent(Math.floor(data.length / 2));
+      })
+      .catch((err) => console.error("Failed to load reviews:", err));
   }, []);
+
+  /* prevent render before data load */
+  if (reviews.length === 0) return null;
 
   const prevIndex = (current - 1 + reviews.length) % reviews.length;
   const nextIndex = (current + 1) % reviews.length;
 
   return (
     <section className="py-20 bg-base-200">
-      <div className=" mx-auto px-4 text-center">
+      <div className="mx-auto px-4 text-center">
         {/* Header */}
         <img
           src={customer}
@@ -63,18 +35,19 @@ const Reviews = () => {
         />
 
         <h2
-          className="text-3xl md:text-4xl font-bold mb-2"
+          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2"
           data-aos="fade-up"
         >
           What our customers are saying
         </h2>
 
         <p
-          className="text-gray-500 max-w-xl mx-auto mb-12"
+          className="text-xs sm:text-sm md:text-base text-gray-500 max-w-xl mx-auto mb-12"
           data-aos="fade-up"
           data-aos-delay="150"
         >
-          Discover how our users improved posture, reduced pain, and moved with ease—effortlessly.
+          Discover how our users improved posture, reduced pain, and moved with
+          ease—effortlessly.
         </p>
 
         {/* Slider */}
@@ -85,11 +58,7 @@ const Reviews = () => {
           </div>
 
           {/* Active */}
-          <ReviewCard
-            item={reviews[current]}
-            active
-            aos="zoom-in"
-          />
+          <ReviewCard item={reviews[current]} active aos="zoom-in" />
 
           {/* Right */}
           <div className="hidden lg:block">
@@ -114,8 +83,9 @@ const Reviews = () => {
               <button
                 key={idx}
                 onClick={() => setCurrent(idx)}
-                className={`w-2 h-2 rounded-full ${idx === current ? "bg-primary" : "bg-gray-300"
-                  }`}
+                className={`w-2 h-2 rounded-full ${
+                  idx === current ? "bg-primary" : "bg-gray-300"
+                }`}
               />
             ))}
           </div>

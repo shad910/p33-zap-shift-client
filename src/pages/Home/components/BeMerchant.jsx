@@ -19,12 +19,12 @@ const BeMerchant = () => {
         >
             <div className="hero-content flex-col lg:flex-row gap-10 lg:gap-16 xl:gap-28">
                 <div className='text-white text-center lg:text-left'>
-                    <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight">
+                    <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold leading-tight">
                         Merchant and Customer Satisfaction <br className="hidden sm:block" />
                         is Our First Priority
                     </h1>
 
-                    <p className="py-6 text-sm sm:text-base max-w-xl mx-auto lg:mx-0">
+                    <p className="py-6 text-xs sm:text-sm md:text-base max-w-xl mx-auto lg:mx-0">
                         We offer the lowest delivery charge with the highest value along with 100% safety of your product. Pathao courier delivers your parcels in every corner of Bangladesh right on time.
                     </p>
 

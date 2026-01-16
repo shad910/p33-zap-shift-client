@@ -17,7 +17,7 @@ const NavBar = () => {
             <li><NavLink to="/coverage">Coverage</NavLink></li>
             <li><NavLink to="/pricing">Pricing</NavLink></li>
             <li><NavLink to="/track-order">Track Order</NavLink></li>
-            <li><NavLink to="/send-parcel">Send Parcel</NavLink></li>
+            <li><NavLink to="/send-parcel">Send a Parcel</NavLink></li>
             <li><NavLink to="/be-a-rider">Be a Rider</NavLink></li>
             <li><NavLink to="/about-us">About Us</NavLink></li>
 
@@ -74,7 +74,7 @@ const NavBar = () => {
                     user && <div className="dropdown dropdown-end">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                <img src={user?.photoURL} />
+                                <img src={user?.photoURL} alt={user?.displayName} data-reference="no-reference" />
                             </div>
                         </label>
                         <ul

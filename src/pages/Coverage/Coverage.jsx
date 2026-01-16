@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useLoaderData } from "react-router";
 import {
   MapContainer,
   TileLayer,
@@ -26,17 +27,12 @@ const FlyToLocation = ({ position }) => {
 };
 
 const Coverage = () => {
-  const [warehouses, setWarehouses] = useState([]);
   const [search, setSearch] = useState("");
 
-  const markerRefs = useRef({});
+  /* ---------- DATA FROM LOADER ---------- */
+  const { data: warehouses } = useLoaderData();
 
-  /* Fetch data once */
-  useEffect(() => {
-    fetch("/warehouses.json")
-      .then((res) => res.json())
-      .then((data) => setWarehouses(data));
-  }, []);
+  const markerRefs = useRef({});
 
   /* PURE filtering only */
   const filtered = useMemo(() => {
@@ -86,7 +82,6 @@ const Coverage = () => {
           <button className="btn btn-primary text-black">Search</button>
         </div>
 
-
         {filtered.length === 0 && (
           <p className="text-center text-gray-500 my-6">
             No service coverage found.
@@ -95,7 +90,6 @@ const Coverage = () => {
 
         {/* Map */}
         <div className="w-full h-80 md:h-105 lg:h-130 xl:h-200  overflow-hidden shadow relative">
-
           <MapContainer
             center={[23.685, 90.3563]}
             zoom={7}

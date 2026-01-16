@@ -1,39 +1,21 @@
-import React, { useState } from "react";
-
-const faqData = [
-  {
-    question: "How does this posture corrector work?",
-    answer:
-      "A posture corrector works by providing support and gentle alignment to your shoulders, back, and spine, encouraging you to maintain proper posture throughout the day. Here's how it typically functions: A posture corrector works by providing support and gentle alignment to your shoulders.",
-  },
-  {
-    question: "Is it suitable for all ages and body types?",
-    answer:
-      "Yes, our posture corrector is adjustable and designed to fit a wide range of body types and ages comfortably.",
-  },
-  {
-    question: "Does it really help with back pain and posture improvement?",
-    answer:
-      "Yes, consistent use can help improve posture and reduce minor back pain by encouraging correct alignment.",
-  },
-  {
-    question: "Does it have smart features like vibration alerts?",
-    answer:
-      "Some models include gentle vibration alerts to remind you to straighten your posture.",
-  },
-  {
-    question: "How will I be notified when the product is back in stock?",
-    answer:
-      "You will receive email notifications or alerts through your account when the product becomes available.",
-  },
-];
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const FAQ = () => {
+  const [faqData, setFaqData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggle = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
+
+  /* Fetch FAQ data from public folder */
+  useEffect(() => {
+    axios
+      .get("/faq.json")
+      .then((res) => setFaqData(res.data))
+      .catch((err) => console.error("Failed to load FAQ data:", err));
+  }, []);
 
   return (
     <section className="py-16  px-4 md:px-0">
@@ -54,7 +36,7 @@ const FAQ = () => {
         <div className="space-y-4">
           {faqData.map((item, index) => (
             <div
-              key={index}
+              key={item.id}
               className="border border-gray-200 rounded-lg overflow-hidden"
               data-aos="fade-up"
               data-aos-delay={index * 150} 

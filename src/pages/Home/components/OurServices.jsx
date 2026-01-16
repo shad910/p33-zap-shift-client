@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import {
   FaShippingFast,
@@ -23,9 +24,9 @@ const OurServices = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch("/services.json")
-      .then((res) => res.json())
-      .then((data) => setServices(data))
+    axios
+      .get("/services.json")
+      .then((res) => setServices(res.data))
       .catch((err) => console.error("Failed to load services:", err));
   }, []);
 
@@ -52,7 +53,7 @@ const OurServices = () => {
         {/* Cards */}
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => {
-            
+
             const Icon = iconMap[service.icon];
 
             return (

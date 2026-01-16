@@ -7,6 +7,9 @@ import Register from "../pages/authentication/Register";
 import Coverage from "../pages/Coverage/Coverage";
 import Error from "../shared/Error";
 import AboutUs from "../shared/AboutUs";
+import PrivateRoute from "./PrivateRoute";
+import SendParcel from "../pages/SendParcel/SendParcel";
+import axios from "axios";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +27,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/coverage",
+        loader: () => axios.get(`warehouses.json`),
         Component: Coverage
+      },
+      {
+        path: "/send-parcel",
+        loader: () => axios.get(`warehouses.json`),
+        element: <PrivateRoute>
+          <SendParcel />
+        </PrivateRoute>
       },
       {
         path: "/about-us",

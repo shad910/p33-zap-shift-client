@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import customer from "../../../../assets/customer-top.png";
 import ReviewCard from "./ReviewCard";
+import axios from "axios";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -8,11 +9,11 @@ const Reviews = () => {
 
   /* fetch reviews from public folder */
   useEffect(() => {
-    fetch("/reviews.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setReviews(data);
-        setCurrent(Math.floor(data.length / 2));
+    axios
+      .get("/reviews.json")
+      .then((res) => {
+        setReviews(res.data);
+        setCurrent(Math.floor(res.data.length / 2));
       })
       .catch((err) => console.error("Failed to load reviews:", err));
   }, []);
@@ -83,9 +84,8 @@ const Reviews = () => {
               <button
                 key={idx}
                 onClick={() => setCurrent(idx)}
-                className={`w-2 h-2 rounded-full ${
-                  idx === current ? "bg-primary" : "bg-gray-300"
-                }`}
+                className={`w-2 h-2 rounded-full ${idx === current ? "bg-primary" : "bg-gray-300"
+                  }`}
               />
             ))}
           </div>

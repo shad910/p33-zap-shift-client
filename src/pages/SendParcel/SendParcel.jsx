@@ -1,14 +1,16 @@
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
-import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 /* =====================================================
    SEND PARCEL COMPONENT
 ===================================================== */
 const SendParcel = () => {
     const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
 
     /* ---------- DATA FROM LOADER ---------- */
     const { data: warehouses } = useLoaderData();
@@ -42,9 +44,9 @@ const SendParcel = () => {
         const details = [];
         let total = 0;
 
-        const parcelId = `P-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+        const parcelId = `PSI-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
         details.push(`Parcel ID: ${parcelId}`);
-        details.push(`Sender: ${user?.displayName || "John Doe"}`);
+        details.push(`Sender: ${user?.displayName || "User Unknown"}`);
 
         if (data.parcelType === "document") {
             const base = sameCity ? 60 : 80;
@@ -81,24 +83,81 @@ const SendParcel = () => {
         const { parcelId, total, breakdown } = getPricingDetails(data);
 
         Swal.fire({
-            title: "Confirm Booking",
-            html: `<div style="text-align:left;font-size:14px">${breakdown}<hr/><strong>Total Cost: ৳${total}</strong></div>`,
+            title: "Review Parcel Details",
             icon: "info",
             showCancelButton: true,
-            confirmButtonText: "Confirm",
+            confirmButtonText: "Proceed to Payment",
+            cancelButtonText: "Cancel",
+            html: `
+            <div style="text-align:left;font-size:14px">
+
+                <!-- STAGE 1: PARCEL INFO -->
+                <div style="margin-bottom:12px">
+                    <strong>📦 Parcel Information</strong>
+                    <p style="margin:4px 0">
+                        Type: ${data.parcelType}<br/>
+                        Title: ${data.parcelTitle}<br/>
+                        Weight: ${data.parcelType === "non-document"
+                    ? `${data.parcelWeight} kg`
+                    : "N/A"
+                }
+                    </p>
+                </div>
+
+                <hr/>
+
+                <!-- STAGE 2: ROUTE INFO -->
+                <div style="margin:10px 0">
+                    <strong>📍 Delivery Route</strong>
+                    <p style="margin:4px 0">
+                        From: ${data.senderRegion} – ${data.senderCenter}<br/>
+                        To: ${data.receiverRegion} – ${data.receiverCenter}
+                    </p>
+                </div>
+
+                <hr/>
+
+                <!-- STAGE 3: COST INFO -->
+                <div style="margin:10px 0">
+                    <strong>💰 Cost Breakdown</strong>
+                    <p style="margin:4px 0">
+                        ${breakdown}
+                    </p>
+                    <strong>Total Cost: ৳${total}</strong>
+                </div>
+
+            </div>
+        `,
         }).then((res) => {
             if (res.isConfirmed) {
+
                 const payload = {
                     ...data,
                     parcelId,
                     deliveryCost: total,
+                    created_by : user?.email || "unknown",
                     creation_date: new Date().toISOString(),
                 };
-                console.log("SAVE TO DB:", payload);
-                Swal.fire("Success", "Parcel booked successfully!", "success");
+
+                axiosSecure.post('/parcels', payload)
+                    .then((res) => {
+                        console.log("DB Response:", res);
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Parcel Booked",
+                                text: "Your parcel has been successfully booked.",
+                            });
+                            console.log("SAVE TO DB:", payload);
+                        }
+                    })
+                    .catch((err) => {
+                        console.error("DB Error:", err);
+                    });
             }
         });
     };
+
 
     return (
         <section className="py-16 ">

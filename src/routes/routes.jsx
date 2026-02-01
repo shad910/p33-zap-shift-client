@@ -10,6 +10,8 @@ import AboutUs from "../shared/AboutUs";
 import PrivateRoute from "./PrivateRoute";
 import SendParcel from "../pages/SendParcel/SendParcel";
 import axios from "axios";
+import DashboardLayout from "../layouts/DashboardLayout";
+import MyParcels from "../pages/Dashboard/MyParcels";
 
 const router = createBrowserRouter([
   {
@@ -61,6 +63,21 @@ const router = createBrowserRouter([
         Component: Register,
       },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: <PrivateRoute>
+      <DashboardLayout></DashboardLayout>
+    </PrivateRoute>,
+    errorElement: <Error />,
+    children: [
+      {
+        index: true,
+        path: "myParcels",
+        Component: MyParcels
+      }
+    ],
+
   }
 ]);
 

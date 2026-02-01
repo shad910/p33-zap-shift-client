@@ -4,9 +4,11 @@ import HowItWorks from './components/HowItWorks';
 import OurServices from './components/OurServices';
 import TrustedBy from './components/TrustedBy';
 import Benefits from './components/Benefits';
-import FAQ from './components/FAQ';
 import BeMerchant from './components/BeMerchant';
-import Reviews from './components/Reviews/Reviews';
+import Reviews from './components/reviews/Reviews';
+import FAQ from './components/FAQ';
+
+
 
 
 const Home = () => {

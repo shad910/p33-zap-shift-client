@@ -19,8 +19,8 @@ const NavBar = () => {
             <li><NavLink to="/track-order">Track Order</NavLink></li>
             <li><NavLink to="/send-parcel">Send a Parcel</NavLink></li>
             <li><NavLink to="/be-a-rider">Be a Rider</NavLink></li>
+            <li><NavLink to="/dashboard">Dashboard</NavLink></li>
             <li><NavLink to="/about-us">About Us</NavLink></li>
-
         </>
     );
 

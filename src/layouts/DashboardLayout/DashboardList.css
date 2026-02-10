@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+ul li a.active {
+    @apply bg-[#CAEB66] text-black;
+}

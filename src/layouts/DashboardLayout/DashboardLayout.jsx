@@ -1,0 +1,44 @@
+import React from 'react';
+import { Link, NavLink, Outlet } from 'react-router';
+import ZapShiftLogo from '../../shared/ZapShiftLogo';
+import './DashboardList.css';
+
+const DashboardLayout = () => {
+    return (
+        <div className="drawer lg:drawer-open">
+            <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
+            <div className="drawer-content ">
+
+                <div class="drawer-content">
+                    {/* NavBar for Dashboard */}
+                    <nav class="navbar w-full bg-base-300">
+                        <label for="my-drawer-3" aria-label="open sidebar" class="btn btn-square btn-ghost lg:hidden">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor" class="my-1.5 inline-block size-4"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg>
+                        </label>
+                        <Link to='/dashboard/myParcels' class="px-4">Dashboard</Link>
+                    </nav>
+
+                    {/* Page content here */}
+                    <div>
+                        <Outlet></Outlet>
+                    </div>
+                </div>
+
+            </div>
+            <div className="drawer-side">
+                <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
+                <ul className="menu bg-base-200 min-h-full w-52 p-2.5">
+                    <li className='mb-5'>
+                        <ZapShiftLogo></ZapShiftLogo>
+                    </li>
+
+                    {/* Sidebar content here */}
+                    <li><NavLink to='/dashboard/myParcels'>My Parcels</NavLink></li>
+                </ul>
+            </div>
+        </div>
+    );
+};
+
+export default DashboardLayout;

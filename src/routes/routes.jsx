@@ -12,6 +12,7 @@ import SendParcel from "../pages/SendParcel/SendParcel";
 import axios from "axios";
 import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
 import MyParcels from "../pages/Dashboard/MyParcels";
+import Verification from "../pages/authentication/Verification";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
         path: "/register",
         Component: Register,
       },
+      {
+        path: "/verification",
+        Component: Verification
+      }
     ],
   },
   {
@@ -72,6 +77,7 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
+        index: true,
         path: "/dashboard/myParcels",
         Component: MyParcels
       }

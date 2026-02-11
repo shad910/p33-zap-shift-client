@@ -1,12 +1,15 @@
 import React from "react";
 import { useForm } from "react-hook-form"
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "./SocialLogin";
+import { sendEmailVerification } from "firebase/auth";
 
 const Register = () => {
 
-    const { createUser } = useAuth();
+    const { createUser, updateUserProfile } = useAuth();
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const {
         register,
@@ -14,19 +17,35 @@ const Register = () => {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = data => {
 
+
+    const onSubmit = (data) => {
         const { name, email, password } = data;
 
         createUser(email, password)
-            .then(result => {
+            .then(async (result) => {
                 const loggedUser = result.user;
+
+                await updateUserProfile({
+                    displayName: name,
+                });
+
+                // Optional data  save it to Firebase if needed
+
                 console.log(loggedUser);
+                // 🔥 SEND VERIFICATION EMAIL
+                await sendEmailVerification(loggedUser);
+
+                navigate("/verification", {
+                    replace: true,
+                    state: { from: location?.state?.from || "/" }
+                });
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error(error);
             });
     };
+
 
     return (
 

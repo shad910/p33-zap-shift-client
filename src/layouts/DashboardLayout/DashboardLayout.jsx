@@ -1,7 +1,7 @@
+import './DashboardList.css';
 import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
 import ZapShiftLogo from '../../shared/ZapShiftLogo';
-import './DashboardList.css';
 import { IoMdArrowBack } from 'react-icons/io';
 
 const DashboardLayout = () => {

@@ -8,6 +8,7 @@ import {
     onAuthStateChanged,
     signInWithPopup,
     signOut,
+    updateProfile,
 } from 'firebase/auth';
 
 const AuthProvider = ({ children }) => {
@@ -37,6 +38,18 @@ const AuthProvider = ({ children }) => {
         return signOut(auth);
     };
 
+    const updateUserProfile = (profile) => {
+        if (auth.currentUser) {
+            return updateProfile(auth.currentUser, profile)
+                .then(() => {
+                    // Update local state after profile update
+                    setUser({ ...auth.currentUser });
+                })
+                .catch((error) => console.error(error));
+        }
+    };
+
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
@@ -53,6 +66,7 @@ const AuthProvider = ({ children }) => {
         signIn,
         signInWithGoogle,
         logOut,
+        updateUserProfile
     };
 
     return (

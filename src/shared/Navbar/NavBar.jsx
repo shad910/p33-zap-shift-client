@@ -5,6 +5,7 @@ import { FaArrowRight } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import ThemeController from "../ThemeController";
+import avatar from "../../assets/image-upload-icon.png"
 
 
 const NavBar = () => {
@@ -74,7 +75,7 @@ const NavBar = () => {
                     user && <div className="dropdown dropdown-end">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
-                                <img src={user?.photoURL} alt={user?.displayName} data-reference="no-reference" />
+                                <img src={user?.photoURL || `${avatar}`} alt={user?.displayName} data-reference="no-reference" />
                             </div>
                         </label>
                         <ul

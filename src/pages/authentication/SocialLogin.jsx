@@ -9,14 +9,15 @@ const SocialLogin = () => {
     const navigate = useNavigate();
 
     const handleGoogleSignIn = () => {
-        signInWithGoogle().then(result => {
-            const loggedUser = result.user;
+        signInWithGoogle()
+            .then(result => {
+                const loggedUser = result.user;
 
-            navigate(location?.state?.from || '/', { replace: true });
+                navigate(location?.state?.from || '/', { replace: true });
 
-        }).catch(error => {
-            console.error(error);
-        });
+            }).catch(error => {
+                console.error(error);
+            });
     };
 
     return (

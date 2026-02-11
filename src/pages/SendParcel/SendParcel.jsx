@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate,  } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 const SendParcel = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
 
     /* ---------- DATA FROM LOADER ---------- */
     const { data: warehouses } = useLoaderData();
@@ -25,6 +26,7 @@ const SendParcel = () => {
         defaultValues: {
             parcelType: "document",
             senderName: user?.displayName || "John Doe",
+            paymentStatus: "Unpaid",
         },
     });
 
@@ -86,7 +88,7 @@ const SendParcel = () => {
             title: "Review Parcel Details",
             icon: "info",
             showCancelButton: true,
-            confirmButtonText: "Proceed to Payment",
+            confirmButtonText: "Proceed",
             cancelButtonText: "Cancel",
             html: `
             <div style="text-align:left;font-size:14px">
@@ -149,6 +151,7 @@ const SendParcel = () => {
                                 text: "Your parcel has been successfully booked.",
                             });
                             console.log("SAVE TO DB:", payload);
+                            navigate('/dashboard/myParcels');
                         }
                     })
                     .catch((err) => {

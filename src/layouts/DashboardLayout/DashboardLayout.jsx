@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
 import ZapShiftLogo from '../../shared/ZapShiftLogo';
 import './DashboardList.css';
+import { IoMdArrowBack } from 'react-icons/io';
 
 const DashboardLayout = () => {
     return (
@@ -11,12 +12,15 @@ const DashboardLayout = () => {
 
                 <div class="drawer-content">
                     {/* NavBar for Dashboard */}
-                    <nav class="navbar w-full bg-base-300">
-                        <label for="my-drawer-3" aria-label="open sidebar" class="btn btn-square btn-ghost lg:hidden">
+                    <nav class="navbar w-full bg-base-300 flex justify-between">
+                        <div>
+                            <label for="my-drawer-3" aria-label="open sidebar" class="btn btn-square btn-ghost lg:hidden">
 
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor" class="my-1.5 inline-block size-4"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg>
-                        </label>
-                        <Link to='/dashboard/myParcels' class="px-4">Dashboard</Link>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor" class="my-1.5 inline-block size-4"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg>
+                            </label>
+                            <Link to='/dashboard/myParcels' class="px-4">Dashboard</Link>
+                        </div>
+                        <button onClick={() => window.history.back()} className="btn btn-sm btn-primary"><IoMdArrowBack spacing={0}/>Back</button>
                     </nav>
 
                     {/* Page content here */}

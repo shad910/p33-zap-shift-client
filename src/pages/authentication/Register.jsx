@@ -49,7 +49,7 @@ const Register = () => {
 
     return (
 
-        <div className="max-w-md mx-auto rounded-xl p-6">
+        <div data-aos='fade-down' className="max-w-md mx-auto rounded-xl p-6">
             {/* Header */}
             <h2 className="text-2xl font-bold text-center">Create an Account</h2>
             <p className="text-center text-sm text-gray-500 mt-1">

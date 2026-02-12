@@ -28,7 +28,7 @@ const Login = () => {
 
     return (
 
-        <div className="max-w-md mx-auto rounded-xl p-6">
+        <div data-aos='fade-up' className="max-w-md mx-auto rounded-xl p-6">
             {/* Header */}
             <h2 className="text-2xl font-bold text-center">Welcome Back</h2>
             <p className="text-center text-sm text-gray-500 mt-1">
@@ -63,9 +63,9 @@ const Login = () => {
 
                 {/* Forgot password */}
                 <div className="text-right">
-                    <a href="#" className="text-sm link link-hover">
+                    <Link to="/forget-password" className="text-sm link link-hover">
                         Forgot Password?
-                    </a>
+                    </Link>
                 </div>
 
                 {/* Login button */}

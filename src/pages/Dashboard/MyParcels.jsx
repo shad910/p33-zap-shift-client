@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import useAuth from '../../hooks/useAuth';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import Loading from '../../shared/Loading';
 import Swal from 'sweetalert2';
 
 const MyParcels = () => {
@@ -9,13 +10,19 @@ const MyParcels = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-    const { data: myParcels = [], refetch } = useQuery({
+    const { isPending, isLoading, data: myParcels = [], refetch } = useQuery({
         queryKey: ['myParcels', user?.email],
         queryFn: async () => {
             const response = await axiosSecure.get(`/parcels?email=${user?.email}`);
             return response.data;
         }
     });
+
+    if (isPending || isLoading) {
+        return (
+            <Loading></Loading>
+        );
+    }
 
     const handleDelete = async (id, paymentStatus) => {
 

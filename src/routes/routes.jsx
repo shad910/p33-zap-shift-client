@@ -13,6 +13,7 @@ import axios from "axios";
 import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
 import MyParcels from "../pages/Dashboard/MyParcels";
 import Verification from "../pages/authentication/Verification";
+import ForgetPassword from "../pages/authentication/ForgetPassword";
 
 const router = createBrowserRouter([
   {
@@ -29,19 +30,19 @@ const router = createBrowserRouter([
         Component: Home,
       },
       {
-        path: "/coverage",
+        path: "coverage",
         loader: () => axios.get(`warehouses.json`),
         Component: Coverage
       },
       {
-        path: "/send-parcel",
+        path: "send-parcel",
         loader: () => axios.get(`warehouses.json`),
         element: <PrivateRoute>
           <SendParcel />
         </PrivateRoute>
       },
       {
-        path: "/about-us",
+        path: "about-us",
         Component: AboutUs
       }
     ],
@@ -56,16 +57,20 @@ const router = createBrowserRouter([
         Component: Error,
       },
       {
-        path: "/login",
+        path: "login",
         Component: Login,
       },
       {
-        path: "/register",
+        path: "register",
         Component: Register,
       },
       {
-        path: "/verification",
+        path: "verification",
         Component: Verification
+      },
+      {
+        path: "forget-password",
+        Component: ForgetPassword,
       }
     ],
   },
@@ -78,7 +83,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        path: "/dashboard/myParcels",
+        path: "my-parcels",
         Component: MyParcels
       }
     ],

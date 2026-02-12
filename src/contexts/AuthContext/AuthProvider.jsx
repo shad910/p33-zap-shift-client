@@ -9,6 +9,7 @@ import {
     signInWithPopup,
     signOut,
     updateProfile,
+    sendPasswordResetEmail,
 } from 'firebase/auth';
 
 const AuthProvider = ({ children }) => {
@@ -49,6 +50,10 @@ const AuthProvider = ({ children }) => {
         }
     };
 
+    const resetPassword = (email) => {
+        return sendPasswordResetEmail(auth, email);
+    };
+
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
@@ -66,7 +71,8 @@ const AuthProvider = ({ children }) => {
         signIn,
         signInWithGoogle,
         logOut,
-        updateUserProfile
+        updateUserProfile,
+        resetPassword
     };
 
     return (

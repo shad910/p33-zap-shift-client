@@ -14,13 +14,11 @@ const NavBar = () => {
 
     const NavLinks = (
         <>
-            <li><NavLink to="/services">Services</NavLink></li>
+            {/* <li><NavLink to="/services">Services</NavLink></li> */}
             <li><NavLink to="/coverage">Coverage</NavLink></li>
-            <li><NavLink to="/pricing">Pricing</NavLink></li>
-            <li><NavLink to="/track-order">Track Order</NavLink></li>
             <li><NavLink to="/send-parcel">Send a Parcel</NavLink></li>
             <li><NavLink to="/be-a-rider">Be a Rider</NavLink></li>
-            <li><NavLink to="/dashboard/myParcels">Dashboard</NavLink></li>
+            <li><NavLink to="/dashboard/my-parcels">Dashboard</NavLink></li>
             <li><NavLink to="/about-us">About Us</NavLink></li>
         </>
     );

@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useForm } from "react-hook-form";
-import { useLoaderData, useNavigate,  } from "react-router";
+import { useLoaderData, useNavigate, } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
@@ -20,13 +20,14 @@ const SendParcel = () => {
     const {
         register,
         watch,
+        setValue,
         handleSubmit,
         formState: { errors },
     } = useForm({
         defaultValues: {
             parcelType: "document",
-            senderName: user?.displayName || "John Doe",
-            paymentStatus: "Unpaid",
+            senderName: user?.displayName || "anonymous",
+            paymentStatus: "unpaid",
         },
     });
 
@@ -137,7 +138,7 @@ const SendParcel = () => {
                     ...data,
                     parcelId,
                     deliveryCost: total,
-                    created_by : user?.email || "unknown",
+                    created_by: user?.email || "unknown",
                     creation_date: new Date().toISOString(),
                 };
 
@@ -151,7 +152,7 @@ const SendParcel = () => {
                                 text: "Your parcel has been successfully booked.",
                             });
                             console.log("SAVE TO DB:", payload);
-                            navigate('/dashboard/myParcels');
+                            navigate('/dashboard/my-parcels');
                         }
                     })
                     .catch((err) => {
@@ -215,7 +216,14 @@ const SendParcel = () => {
                             <h3 className="font-semibold mb-2.5">Sender Details</h3>
                             <div className="space-y-1.5">
                                 <label className="font-semibold block">Name</label>
-                                <input {...register("senderName")} className="input input-bordered w-full" disabled />
+                                <input
+                                    {...register("senderName", { maxLength: 15 })}
+                                    className={`input input-bordered w-full ${errors.senderName ? "input-error" : ""}`}
+                                    disabled
+                                />
+                                {errors.senderName && (
+                                    <p className="text-red-500 text-xs">Name cannot exceed 15 characters</p>
+                                )}
                             </div>
                             <div className="space-y-1.5">
                                 <label className="font-semibold block">Address</label>
@@ -255,8 +263,23 @@ const SendParcel = () => {
                             <h3 className="font-semibold mb-2.5">Receiver Details</h3>
                             <div className="space-y-1.5">
                                 <label className="font-semibold block">Name</label>
-                                <input {...register("receiverName", { required: "Name required" })} placeholder="Receiver Name" className="input input-bordered w-full" />
-                                {errors.receiverName && <p className="text-red-500 text-sm">{errors.receiverName.message}</p>}
+                                <input
+                                    {...register("receiverName", {
+                                        required: "Name required",
+                                        maxLength: {
+                                            value: 15,
+                                            message: "Name cannot exceed 15 characters"
+                                        }
+                                    })}
+                                    placeholder="Receiver Name"
+                                    className="input input-bordered w-full"
+                                />
+
+                                {errors.receiverName && (
+                                    <p className="text-red-500 text-sm">
+                                        {errors.receiverName.message}
+                                    </p>
+                                )}
                             </div>
                             <div className="space-y-1.5">
                                 <label className="font-semibold block">Address</label>

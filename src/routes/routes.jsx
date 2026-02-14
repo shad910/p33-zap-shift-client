@@ -1,19 +1,21 @@
 import { createBrowserRouter } from "react-router";
+import axios from "axios";
+import PrivateRoute from "./PrivateRoute";
+import Error from "../shared/Error";
 import RootLayout from "../layouts/RootLayout";
 import Home from "../pages/Home/Home";
-import AuthLayout from "../layouts/AuthLayout";
-import Login from "../pages/authentication/Login";
-import Register from "../pages/authentication/Register";
 import Coverage from "../pages/Coverage/Coverage";
-import Error from "../shared/Error";
-import AboutUs from "../shared/AboutUs";
-import PrivateRoute from "./PrivateRoute";
 import SendParcel from "../pages/SendParcel/SendParcel";
-import axios from "axios";
+import AboutUs from "../shared/AboutUs";
+import AuthLayout from "../layouts/AuthLayout";
+import Register from "../pages/authentication/Register";
+import Verification from "../pages/authentication/Verification";
+import Login from "../pages/authentication/Login";
+import ForgetPassword from "../pages/authentication/ForgetPassword";
 import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
 import MyParcels from "../pages/Dashboard/MyParcels";
-import Verification from "../pages/authentication/Verification";
-import ForgetPassword from "../pages/authentication/ForgetPassword";
+import Payment from "../pages/Dashboard/Payment/Payment";
+import PaymentHistory from "../pages/Dashboard/Payment/PaymentHistory";
 
 const router = createBrowserRouter([
   {
@@ -85,6 +87,14 @@ const router = createBrowserRouter([
         index: true,
         path: "my-parcels",
         Component: MyParcels
+      },
+      {
+        path: "payment/:id",
+        Component: Payment
+      },
+      {
+        path: "payment-history",
+        Component: PaymentHistory
       }
     ],
 

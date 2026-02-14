@@ -4,6 +4,7 @@ import useAuth from '../../hooks/useAuth';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import Loading from '../../shared/Loading';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router';
 
 const MyParcels = () => {
 
@@ -115,7 +116,7 @@ const MyParcels = () => {
                                 </td>
 
                                 <td>
-                                    {parcel.paymentStatus === "Paid" ? (
+                                    {parcel.paymentStatus === "paid" ? (
                                         <span className="badge badge-sm sm:badge-md badge-success">
                                             Paid
                                         </span>
@@ -132,10 +133,10 @@ const MyParcels = () => {
                                     </button>
 
                                     {
-                                        parcel.paymentStatus !== "Paid" && (
-                                            <button className="btn btn-xs sm:btn-sm btn-primary w-full sm:w-auto text-black">
+                                        parcel.paymentStatus !== "paid" && (
+                                            <Link to={`/dashboard/payment/${parcel._id}`} className="btn btn-xs sm:btn-sm btn-primary w-full sm:w-auto text-black">
                                                 Pay
-                                            </button>
+                                            </Link>
                                         )
                                     }
 

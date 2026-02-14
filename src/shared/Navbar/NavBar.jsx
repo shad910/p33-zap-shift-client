@@ -18,8 +18,8 @@ const NavBar = () => {
             <li><NavLink to="/coverage">Coverage</NavLink></li>
             <li><NavLink to="/send-parcel">Send a Parcel</NavLink></li>
             <li><NavLink to="/be-a-rider">Be a Rider</NavLink></li>
-            <li><NavLink to="/dashboard/my-parcels">Dashboard</NavLink></li>
             <li><NavLink to="/about-us">About Us</NavLink></li>
+            <li><NavLink to="/dashboard/my-parcels">Dashboard</NavLink></li>
         </>
     );
 
@@ -80,8 +80,6 @@ const NavBar = () => {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content mt-3 w-52 rounded-box bg-base-100 shadow z-50 "
                         >
-                            <li><a>Profile</a></li>
-                            <li><a>Settings</a></li>
                             <div className="lg:hidden">
                                 {NavLinks}
                             </div>

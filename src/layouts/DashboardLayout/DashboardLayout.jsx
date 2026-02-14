@@ -3,6 +3,8 @@ import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
 import ZapShiftLogo from '../../shared/ZapShiftLogo';
 import { IoMdArrowBack } from 'react-icons/io';
+import { FiUser, FiPackage, FiCreditCard, FiMapPin } from 'react-icons/fi';
+
 
 const DashboardLayout = () => {
     return (
@@ -20,7 +22,7 @@ const DashboardLayout = () => {
                             </label>
                             <Link to='/dashboard/my-parcels' class="px-4 font-bold text-xl">Dashboard</Link>
                         </div>
-                        <button onClick={() => window.history.back()} className="btn btn-sm btn-primary text-black"><IoMdArrowBack spacing={0}/>Back</button>
+                        <button onClick={() => window.history.back()} className="btn btn-sm btn-primary text-black"><IoMdArrowBack spacing={0} />Back</button>
                     </nav>
 
                     {/* Page content here */}
@@ -38,7 +40,38 @@ const DashboardLayout = () => {
                     </li>
 
                     {/* Sidebar content here */}
-                    <li><NavLink to='/dashboard/my-parcels'>My Parcels</NavLink></li>
+                    <li>
+                        <NavLink
+                            to='/dashboard/profile'
+                            className="flex items-center font-bold"
+                        >
+                            <FiUser className="mr-0.5 font-bold" size={16} /> Profile
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to='/dashboard/my-parcels'
+                            className="flex items-center font-bold"
+                        >
+                            <FiPackage className="mr-0.5 font-bold" size={16} /> My Parcels
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to='/dashboard/payment-history'
+                            className="flex items-center font-bold"
+                        >
+                            <FiCreditCard className="mr-0.5 font-bold" size={16} /> Payment History
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to='/dashboard/track-parcel'
+                            className="flex items-center font-bold"
+                        >
+                            <FiMapPin className="mr-0.5 font-bold" size={16} /> Track Parcel
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
         </div>

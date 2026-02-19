@@ -1,11 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 @plugin "daisyui";
+
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary: #CAEB66;
-  --color-secondary: #03373D;
+  --color-primary: #caeb66;
+  --color-secondary: #03373d;
+}
+
+@plugin "daisyui/theme" {
+  name: "dark";
+  default: true;
+  --color-primary: #caeb66;
+
 }
 
 .font-urbanist {
@@ -13,4 +21,22 @@
   font-style: normal;
   font-weight: 400;
   font-optical-sizing: auto;
+}
+
+#nav-links-sm > li > a.active {
+  @apply bg-[#CAEB66] text-black;
+}
+#nav-links-sms > li > a.active {
+  @apply bg-[#CAEB66] text-black;
+}
+#nav-links-lg > li > a.active {
+  @apply bg-[#CAEB66] text-black;
+}
+
+#footer-links > li > a.active {
+  @apply text-[#CAEB66];
+}
+
+#dashboard-links > li > a.active {
+  @apply bg-[#CAEB66] text-black;
 }

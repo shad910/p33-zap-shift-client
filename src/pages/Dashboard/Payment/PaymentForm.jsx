@@ -7,57 +7,47 @@ import Loading from '../../../shared/Loading';
 import Swal from 'sweetalert2';
 
 const PaymentForm = () => {
-
     const stripe = useStripe();
     const elements = useElements();
     const axiosSecure = useAxiosSecure();
-    const { id: parcelID } = useParams();
+    const { id: mainParcelID } = useParams();
     const navigate = useNavigate();
-
 
     const [error, setError] = useState("");
 
     const { isPending, isLoading, data: parcel } = useQuery({
-        queryKey: ['parcels', parcelID],
+        queryKey: ['parcels', mainParcelID],
         queryFn: async () => {
-            const response = await axiosSecure.get(`/parcels/${parcelID}`);
+            const response = await axiosSecure.get(`/parcels/${mainParcelID}`);
             return response.data;
         }
-
     });
 
-    if (isPending || isLoading) {
-        return (
-            <Loading></Loading>
-        );
-    };
+    if (isPending || isLoading) return <Loading />;
 
-    const { senderName: name, created_by: email, deliveryCost } = parcel;
+    const { senderName: name, created_by: email, parcelId, deliveryCost } = parcel;
     const amount = deliveryCost * 100; // Convert to cents for Stripe
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         if (!stripe || !elements) return;
 
         const card = elements.getElement(CardElement);
-
         if (!card) return;
 
         try {
-
             setError("");
 
             // Step 1: Create Payment Intent
             const response = await axiosSecure.post('/create-payment-intent', {
                 amount,
-                parcelID,
+                mainParcelID,
+                parcelId,
                 email
             });
-
             const clientSecret = response.data.clientSecret;
 
-            // Step 2: Confirm Payment (this creates PaymentMethod automatically)
+            // Step 2: Confirm Payment
             const result = await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
                     card,
@@ -76,36 +66,34 @@ const PaymentForm = () => {
             if (result.paymentIntent.status === "succeeded") {
                 console.log("Payment succeeded:", result.paymentIntent);
 
-                // Send payment data to backend
+                // Step 3: Send payment data to backend
                 const paymentResponse = await axiosSecure.post('/payments', {
-                    parcelId: parcelID,
-                    email: email,
+                    mainParcelID,
+                    parcelId,
+                    email,
                     amount: deliveryCost,
-                    paymentMethod: result.paymentIntent.payment_method_types,
+                    paymentMethod: result.paymentIntent.payment_method_types || ["Card / Stripe"], // stored as array
                     transactionId: result.paymentIntent.id
                 });
 
                 console.log(paymentResponse.data);
-
 
                 if (paymentResponse.data.insertedId) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Payment Successful!',
                         html: `
-            Your payment has been completed successfully.<br/>
-            <strong class="text-sm font-bold">Transaction ID:</strong> ${result.paymentIntent.id}
-        `,
+                            Your payment has been completed successfully.<br/>
+                            <strong class="text-sm font-bold">Transaction ID:</strong> ${result.paymentIntent.id}
+                        `,
                         confirmButtonText: 'Go to My Parcels',
                         timer: 5000,
                         timerProgressBar: true,
                     }).then(() => {
-                        // Redirect using React Router
                         navigate("/dashboard/my-parcels");
                     });
                 }
             }
-
         } catch (error) {
             setError("Payment failed. Please try again.");
             console.error(error);
@@ -114,25 +102,17 @@ const PaymentForm = () => {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto mt-8">
-
-            {/* Heading & Description */}
             <div className="text-center space-y-1">
-                <h2 className="text-2xl font-bold">
-                    Complete Your Purchase
-                </h2>
+                <h2 className="text-2xl font-bold">Complete Your Purchase</h2>
                 <p className="text-sm text-base-content/70">
                     Pay securely using your debit or credit card through Stripe's encrypted card payment system.
                 </p>
             </div>
 
-            {/* Card Input */}
             <div className="form-control">
                 <label className="label">
-                    <span className="label-text font-semibold">
-                        Card Information
-                    </span>
+                    <span className="label-text font-semibold">Card Information</span>
                 </label>
-
                 <div className="border border-base-300 rounded-lg p-4 bg-base-200 focus-within:border-primary transition ">
                     <CardElement
                         options={{
@@ -141,27 +121,17 @@ const PaymentForm = () => {
                                     fontSize: "16px",
                                     color: "#1f2937",
                                     fontFamily: "Inter, sans-serif",
-                                    "::placeholder": {
-                                        color: "#9ca3af",
-                                    },
+                                    "::placeholder": { color: "#9ca3af" },
                                 },
-                                invalid: {
-                                    color: "#ef4444",
-                                },
+                                invalid: { color: "#ef4444" },
                             },
                         }}
                     />
                 </div>
             </div>
 
-            {/* Error Message */}
-            {error && (
-                <div className="text-red-500 text-xs mt-2">
-                    {error}
-                </div>
-            )}
+            {error && <div className="text-red-500 text-xs mt-2">{error}</div>}
 
-            {/* Submit Button */}
             <button
                 type="submit"
                 disabled={!stripe}
@@ -169,9 +139,7 @@ const PaymentForm = () => {
             >
                 Pay {deliveryCost}$
             </button>
-
         </form>
-
     );
 };
 

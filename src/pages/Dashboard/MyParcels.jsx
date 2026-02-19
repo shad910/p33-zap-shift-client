@@ -3,15 +3,17 @@ import { useQuery } from '@tanstack/react-query';
 import useAuth from '../../hooks/useAuth';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import Loading from '../../shared/Loading';
-import Swal from 'sweetalert2';
 import { Link } from 'react-router';
+import Lottie from 'lottie-react';
+import Swal from 'sweetalert2';
+import NoDataFound from '../../assets/animations/noDataAvailable.json'
 
 const MyParcels = () => {
 
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-    const { isPending, isLoading, data: myParcels = [], refetch } = useQuery({
+    const { isPending, isFetching, isLoading, data: myParcels = [], refetch } = useQuery({
         queryKey: ['myParcels', user?.email],
         queryFn: async () => {
             const response = await axiosSecure.get(`/parcels?email=${user?.email}`);
@@ -19,7 +21,7 @@ const MyParcels = () => {
         }
     });
 
-    if (isPending || isLoading) {
+    if (isPending || isLoading || isFetching) {
         return (
             <Loading></Loading>
         );
@@ -80,80 +82,96 @@ const MyParcels = () => {
 
 
 
-    return (
-        <div className="w-full overflow-x-auto">
-            <table className="table table-zebra w-full text-[10px] sm:text-xs md:text-sm lg:text-base">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Parcel Name</th>
-                        <th className="hidden sm:table-cell">Type</th>
-                        <th>Created at</th>
-                        <th>Payment</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        myParcels.map((parcel, index) =>
-                            <tr key={parcel._id} className="hover:bg-base-300">
-                                <th>{index + 1}</th>
+    if (myParcels.length === 0) {
+        return (
+            <div className="text-center py-12">
 
-                                <td>{parcel.parcelTitle}</td>
+                <div className='flex justify-center items-center mb-2.5'>
+                    <Lottie animationData={NoDataFound} style={{ width: '400px' }} loop></Lottie>
+                </div>
 
-                                <td className="hidden sm:table-cell">
-                                    {parcel.parcelType}
-                                </td>
+                <h2 className="text-2xl font-bold">No Parcels Found</h2>
+                <p className="text-gray-500 mt-2">You haven't created any parcels yet.</p>
+            </div>
+        );
+    } else {
+        return (
+            <div className="w-full overflow-x-auto">
+                <table className="table table-zebra w-full text-[10px] sm:text-xs md:text-sm lg:text-base">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Parcel Name</th>
+                            <th className="hidden sm:table-cell">Type</th>
+                            <th>Created at</th>
+                            <th>Payment</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            myParcels.map((parcel, index) =>
+                                <tr key={parcel._id} className="hover:bg-base-300">
+                                    <th>{index + 1}</th>
 
-                                <td>
-                                    {new Date(parcel.creation_date).toLocaleString("en-GB", {
-                                        day: "2-digit",
-                                        month: "short",
-                                        year: "numeric",
-                                        hour: "2-digit",
-                                        minute: "2-digit",
-                                    })}
-                                </td>
+                                    <td>{parcel.parcelTitle}</td>
 
-                                <td>
-                                    {parcel.paymentStatus === "paid" ? (
-                                        <span className="badge badge-sm sm:badge-md badge-success">
-                                            Paid
-                                        </span>
-                                    ) : (
-                                        <span className="badge badge-sm sm:badge-md badge-error">
-                                            Unpaid
-                                        </span>
-                                    )}
-                                </td>
+                                    <td className="hidden sm:table-cell">
+                                        {parcel.parcelType}
+                                    </td>
 
-                                <td className="flex flex-col gap-1 sm:flex-row sm:gap-2">
-                                    <button className="btn btn-xs sm:btn-sm btn-outline w-full sm:w-auto">
-                                        View
-                                    </button>
+                                    <td>
+                                        {new Date(parcel.creation_date).toLocaleString("en-GB", {
+                                            day: "2-digit",
+                                            month: "short",
+                                            year: "numeric",
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                        })}
+                                    </td>
 
-                                    {
-                                        parcel.paymentStatus !== "paid" && (
-                                            <Link to={`/dashboard/payment/${parcel._id}`} className="btn btn-xs sm:btn-sm btn-primary w-full sm:w-auto text-black">
-                                                Pay
-                                            </Link>
-                                        )
-                                    }
+                                    <td>
+                                        {parcel.paymentStatus === "paid" ? (
+                                            <span className="badge badge-sm sm:badge-md badge-success">
+                                                Paid
+                                            </span>
+                                        ) : (
+                                            <span className="badge badge-sm sm:badge-md badge-error">
+                                                Unpaid
+                                            </span>
+                                        )}
+                                    </td>
 
-                                    <button
-                                        onClick={() => handleDelete(parcel._id, parcel.paymentStatus)}
-                                        className="btn btn-xs sm:btn-sm btn-error w-full sm:w-auto"
-                                    >
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        )
-                    }
-                </tbody>
-            </table>
-        </div>
-    );
+                                    <td className="flex flex-col gap-1 sm:flex-row sm:gap-2">
+                                        <button className="btn btn-xs sm:btn-sm btn-outline w-full sm:w-auto">
+                                            View
+                                        </button>
+
+                                        {
+                                            parcel.paymentStatus !== "paid" && (
+                                                <Link to={`/dashboard/payment/${parcel._id}`} className="btn btn-xs sm:btn-sm btn-primary w-full sm:w-auto text-black">
+                                                    Pay
+                                                </Link>
+                                            )
+                                        }
+
+                                        <button
+                                            onClick={() => handleDelete(parcel._id, parcel.paymentStatus)}
+                                            className="btn btn-xs sm:btn-sm btn-error w-full sm:w-auto"
+                                        >
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            )
+                        }
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+
+
 };
 
 export default MyParcels;

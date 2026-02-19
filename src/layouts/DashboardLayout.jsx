@@ -1,7 +1,6 @@
-import './DashboardList.css';
 import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
-import ZapShiftLogo from '../../shared/ZapShiftLogo';
+import ZapShiftLogo from '../shared/ZapShiftLogo';
 import { IoMdArrowBack } from 'react-icons/io';
 import { FiUser, FiPackage, FiCreditCard, FiMapPin } from 'react-icons/fi';
 
@@ -34,7 +33,7 @@ const DashboardLayout = () => {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-base-200 min-h-full w-52 p-2.5">
+                <ul id='dashboard-links' className="menu bg-base-200 min-h-full w-52 p-2.5">
                     <li className='mb-5'>
                         <ZapShiftLogo></ZapShiftLogo>
                     </li>

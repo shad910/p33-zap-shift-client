@@ -32,7 +32,7 @@ const AboutUs = () => {
         {/* Tab List */}
         <TabList className="flex flex-wrap gap-2 border-b pb-2 mb-8 justify-center md:justify-start">
           <Tab
-            selectedClassName="bg-primary text-white"
+            selectedClassName="bg-primary text-black"
             className="flex items-center gap-2 px-4 py-2 cursor-pointer rounded-lg font-medium hover:bg-base-200 transition text-sm sm:text-base"
           >
             <FaBookOpen />
@@ -40,7 +40,7 @@ const AboutUs = () => {
           </Tab>
 
           <Tab
-            selectedClassName="bg-primary text-white"
+            selectedClassName="bg-primary text-black"
             className="flex items-center gap-2 px-4 py-2 cursor-pointer rounded-lg font-medium hover:bg-base-200 transition text-sm sm:text-base"
           >
             <FaBullseye />
@@ -48,7 +48,7 @@ const AboutUs = () => {
           </Tab>
 
           <Tab
-            selectedClassName="bg-primary text-white"
+            selectedClassName="bg-primary text-black"
             className="flex items-center gap-2 px-4 py-2 cursor-pointer rounded-lg font-medium hover:bg-base-200 transition text-sm sm:text-base"
           >
             <FaChartLine />
@@ -56,7 +56,7 @@ const AboutUs = () => {
           </Tab>
 
           <Tab
-            selectedClassName="bg-primary text-white"
+            selectedClassName="bg-primary text-black"
             className="flex items-center gap-2 px-4 py-2 cursor-pointer rounded-lg font-medium hover:bg-base-200 transition text-sm sm:text-base"
           >
             <FaUsers />

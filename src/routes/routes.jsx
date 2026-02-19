@@ -12,10 +12,13 @@ import Register from "../pages/authentication/Register";
 import Verification from "../pages/authentication/Verification";
 import Login from "../pages/authentication/Login";
 import ForgetPassword from "../pages/authentication/ForgetPassword";
-import DashboardLayout from "../layouts/DashboardLayout/DashboardLayout";
+import DashboardLayout from "../layouts/DashboardLayout";
 import MyParcels from "../pages/Dashboard/MyParcels";
 import Payment from "../pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../pages/Dashboard/Payment/PaymentHistory";
+import TrackParcel from "../pages/Dashboard/TrackParcel";
+import Profile from "../pages/Dashboard/Profile/Profile";
+import RidersForm from "../pages/RidersForm";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +45,15 @@ const router = createBrowserRouter([
         element: <PrivateRoute>
           <SendParcel />
         </PrivateRoute>
+      },
+      {
+        path: "be-a-rider",
+        loader: async () => {
+          const res = await axios.get("/warehouses.json");
+          return res.data;
+        },
+        Component: RidersForm
+
       },
       {
         path: "about-us",
@@ -84,7 +96,14 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-        index: true,
+        path: "*",
+        Component: Error
+      },
+      {
+        path: "profile",
+        Component: Profile
+      },
+      {
         path: "my-parcels",
         Component: MyParcels
       },
@@ -95,6 +114,10 @@ const router = createBrowserRouter([
       {
         path: "payment-history",
         Component: PaymentHistory
+      },
+      {
+        path: "track-parcel",
+        Component: TrackParcel
       }
     ],
 

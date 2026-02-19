@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form"
 import { Link, useLocation, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "./SocialLogin";
 import { sendEmailVerification } from "firebase/auth";
+import axios from "axios";
+import useAxios from "../../hooks/useAxios";
 
 const Register = () => {
 
     const { createUser, updateUserProfile } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
+    const axiosInstance = useAxios()
+
+    const [profilePicture, setProfilePicture] = useState('');
 
     const {
         register,
@@ -17,6 +22,21 @@ const Register = () => {
         formState: { errors },
     } = useForm();
 
+    const handleImageUpload = async(event) => {
+        const file = event.target.files[0];
+
+        if (!file) {
+            console.error("No file selected");
+            return;
+        };
+
+        const formData = new FormData();
+        formData.append("image", file);
+
+        const response = await axios.post(`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_ImgBB_Key}`, formData);
+        const imageUrl = response.data.data.url;
+        setProfilePicture(imageUrl);
+    };
 
 
     const onSubmit = (data) => {
@@ -26,14 +46,25 @@ const Register = () => {
             .then(async (result) => {
                 const loggedUser = result.user;
 
+                const userInformation = {
+                    name: name,
+                    email: email,
+                    role: "user",
+                    created_at: new Date().toISOString(),
+                    last_login: new Date().toISOString(),
+                };
+
+                const response = await axiosInstance.post("/users", userInformation);
+                console.log(response.data);
+
+                // Updated User Information
                 await updateUserProfile({
                     displayName: name,
+                    photoURL: profilePicture
                 });
 
-                // Optional data  save it to Firebase if needed
-
                 console.log(loggedUser);
-                // 🔥 SEND VERIFICATION EMAIL
+                // SEND VERIFICATION EMAIL
                 await sendEmailVerification(loggedUser);
 
                 navigate("/verification", {
@@ -58,6 +89,16 @@ const Register = () => {
 
             {/* Form */}
             <form onSubmit={handleSubmit(onSubmit)} className="mt-6 space-y-4">
+
+                <fieldset className="fieldset">
+                    <legend className="fieldset-legend text-xs text-gray-500">Upload your image</legend>
+                    <input
+                        onChange={handleImageUpload}
+                        type="file"
+                        className="file-input input-bordered w-full" />
+                    <label className="label text-xs text-gray-500">Max size 2MB</label>
+                </fieldset>
+
                 {/* Name */}
                 <div>
                     <input
@@ -68,7 +109,6 @@ const Register = () => {
                     />
                     {errors.name?.type === 'required' && <p className="text-red-500 text-xs mt-1">Name is required</p>}
                 </div>
-
 
                 {/* Email */}
                 <div>

@@ -1,5 +1,0 @@
-@import "tailwindcss";
-
-nav a.active {
-    @apply bg-[#CAEB66] text-black;
-}

@@ -18,7 +18,7 @@ const NavBar = () => {
             <li><NavLink to="/send-parcel">Send a Parcel</NavLink></li>
             <li><NavLink to="/be-a-rider">Be a Rider</NavLink></li>
             <li><NavLink to="/about-us">About Us</NavLink></li>
-            <li><NavLink to="/dashboard/my-parcels">Dashboard</NavLink></li>
+            {user && <li><NavLink to="/dashboard/my-parcels">Dashboard</NavLink></li>}
         </>
     );
 

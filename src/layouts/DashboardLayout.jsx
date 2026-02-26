@@ -2,7 +2,8 @@ import React from 'react';
 import { Link, NavLink, Outlet } from 'react-router';
 import ZapShiftLogo from '../shared/ZapShiftLogo';
 import { IoMdArrowBack } from 'react-icons/io';
-import { FiUser, FiPackage, FiCreditCard, FiMapPin } from 'react-icons/fi';
+import { FiUser, FiPackage, FiCreditCard, FiMapPin, FiUsers, FiClock } from 'react-icons/fi';
+import { FaBan } from 'react-icons/fa';
 
 
 const DashboardLayout = () => {
@@ -69,6 +70,30 @@ const DashboardLayout = () => {
                             className="flex items-center font-bold"
                         >
                             <FiMapPin className="mr-0.5 font-bold" size={16} /> Track Parcel
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to='/dashboard/active-riders'
+                            className="flex items-center font-bold"
+                        >
+                            <FiUsers className="mr-0.5 font-bold" size={16} /> Active Riders
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to='/dashboard/deactive-riders'
+                            className="flex items-center font-bold"
+                        >
+                            <FaBan className="mr-0.5 font-bold" size={16} /> Deactive Riders
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to='/dashboard/pending-riders'
+                            className="flex items-center font-bold"
+                        >
+                            <FiClock className="mr-0.5 font-bold" size={16} /> Pending Riders
                         </NavLink>
                     </li>
                 </ul>

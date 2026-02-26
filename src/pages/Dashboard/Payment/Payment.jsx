@@ -9,10 +9,7 @@ const stripePromise = loadStripe(import.meta.env.VITE_Payment_Key);
 const Payment = () => {
 
     return (
-        <section>
-
-            <h1>Payment Page</h1>
-
+        <section className='my-10'>
             <Elements stripe={stripePromise}>
                 <PaymentForm></PaymentForm>
             </Elements>

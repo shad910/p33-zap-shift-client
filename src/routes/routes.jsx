@@ -19,6 +19,9 @@ import PaymentHistory from "../pages/Dashboard/Payment/PaymentHistory";
 import TrackParcel from "../pages/Dashboard/TrackParcel";
 import Profile from "../pages/Dashboard/Profile/Profile";
 import RidersForm from "../pages/RidersForm";
+import ActiveRiders from "../pages/Dashboard/ActiveRiders";
+import PendingRiders from "../pages/Dashboard/PendingRiders";
+import DeActiveRiders from "../pages/Dashboard/DeactiveRiders";
 
 const router = createBrowserRouter([
   {
@@ -52,7 +55,9 @@ const router = createBrowserRouter([
           const res = await axios.get("/warehouses.json");
           return res.data;
         },
-        Component: RidersForm
+        element: <PrivateRoute>
+          <RidersForm />
+        </PrivateRoute>
 
       },
       {
@@ -118,6 +123,18 @@ const router = createBrowserRouter([
       {
         path: "track-parcel",
         Component: TrackParcel
+      },
+      {
+        path: "active-riders",
+        Component: ActiveRiders
+      },
+      {
+        path: "deActive-riders",
+        Component: DeActiveRiders
+      },
+      {
+        path: "pending-riders",
+        Component: PendingRiders
       }
     ],
 

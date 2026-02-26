@@ -12,7 +12,7 @@ const AboutUs = () => {
   return (
     <section
       data-aos="fade-up"
-      className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 my-5"
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10 bg-base-100"
     >
       {/* Heading */}
       <div
@@ -22,7 +22,7 @@ const AboutUs = () => {
         <h2 className="text-3xl sm:text-4xl font-bold mb-4">
           About Us
         </h2>
-        <p className="text-gray-500 max-w-2xl mx-auto md:mx-0">
+        <p className="max-w-2xl mx-auto md:mx-0">
           Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle.
           From personal packages to business shipments — we deliver on time, every time.
         </p>
@@ -66,10 +66,10 @@ const AboutUs = () => {
 
         {/* Story Panel */}
         <TabPanel>
-          <div data-aos="fade-up" className="space-y-6 text-gray-600 leading-relaxed">
+          <div data-aos="fade-up" className="space-y-6 leading-relaxed">
             <div>
               <h3 className="text-2xl font-bold mb-2">Our Story</h3>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm">
                 How we started and how we became a trusted nationwide delivery partner.
               </p>
             </div>
@@ -97,10 +97,10 @@ const AboutUs = () => {
 
         {/* Mission Panel */}
         <TabPanel>
-          <div data-aos="fade-up" className="space-y-6 text-gray-600 leading-relaxed">
+          <div data-aos="fade-up" className="space-y-6 leading-relaxed">
             <div>
               <h3 className="text-2xl font-bold mb-2">Our Mission</h3>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm">
                 Delivering reliability, speed, and trust across every shipment.
               </p>
             </div>
@@ -128,10 +128,10 @@ const AboutUs = () => {
 
         {/* Success Panel */}
         <TabPanel>
-          <div data-aos="fade-up" className="space-y-6 text-gray-600 leading-relaxed">
+          <div data-aos="fade-up" className="space-y-6 leading-relaxed">
             <div>
               <h3 className="text-2xl font-bold mb-2">Our Success</h3>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm">
                 Milestones and achievements that define our growth.
               </p>
             </div>
@@ -159,10 +159,10 @@ const AboutUs = () => {
 
         {/* Team Panel */}
         <TabPanel>
-          <div data-aos="fade-up" className="space-y-6 text-gray-600 leading-relaxed">
+          <div data-aos="fade-up" className="space-y-6 leading-relaxed">
             <div>
               <h3 className="text-2xl font-bold mb-2">Our Team</h3>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm">
                 The people behind our reliable delivery network.
               </p>
             </div>

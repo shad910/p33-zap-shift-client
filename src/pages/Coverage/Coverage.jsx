@@ -65,31 +65,32 @@ const Coverage = () => {
   }, [activeWarehouse]);
 
   return (
-    <section className="py-16">
-      <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-2xl md:text-3xl font-bold mb-6">
+    <section className="py-10 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center sm:text-left">
           We are available in 64 districts
         </h2>
 
         {/* Search */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-8 max-w-xl">
+        <div className="flex flex-col sm:flex-row gap-3 mb-8 max-w-xl mx-auto sm:mx-0">
           <input
             className="input input-bordered w-full"
             placeholder="Search district, city or area"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <button className="btn btn-primary text-black">Search</button>
+          <button className="btn btn-primary text-black w-full sm:w-auto">Search</button>
         </div>
 
+        {/* No Results Message */}
         {filtered.length === 0 && (
-          <p className="text-center text-gray-500 my-6">
+          <p className="text-center text-gray-500 my-6 text-sm sm:text-base">
             No service coverage found.
           </p>
         )}
 
         {/* Map */}
-        <div className="w-full h-80 md:h-105 lg:h-130 xl:h-200  overflow-hidden shadow relative">
+        <div className="w-full h-72 sm:h-96 md:h-[420px] lg:h-[520px] xl:h-[600px] overflow-hidden shadow rounded-lg">
           <MapContainer
             center={[23.685, 90.3563]}
             zoom={7}
@@ -115,7 +116,7 @@ const Coverage = () => {
                 }}
               >
                 <Popup autoClose={false} closeOnClick={false}>
-                  <div className="text-xs">
+                  <div className="text-xs sm:text-sm">
                     <p className="font-semibold">{w.district}</p>
                     <p>City: {w.city}</p>
                     <p className="font-medium">Covered Areas:</p>

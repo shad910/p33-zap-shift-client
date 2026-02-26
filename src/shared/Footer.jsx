@@ -16,7 +16,7 @@ const Footer = () => {
   </>
 
   return (
-    <footer className="lg:w-11/12 mx-auto bg-linear-to-b from-black to-neutral-900 text-white lg:rounded-2xl">
+    <footer className=" bg-linear-to-b from-black to-neutral-900 text-white">
       <div className="max-w-7xl px-6 py-16 text-center">
 
         {/* Logo / Brand */}

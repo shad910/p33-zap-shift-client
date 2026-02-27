@@ -55,16 +55,12 @@ const NavBar = () => {
                 {user
                     ? ""
                     : <div className="hidden lg:flex gap-3">
-                        <Link to="/login" className="btn bg-[#CAEB66] text-black">
+                        <Link to="/register" className="btn btn-primary btn-outline text-black">
+                            Register
+                        </Link>
+                        <Link to="/login" className="btn btn-primary text-black">
                             Sign in
                         </Link>
-
-                        <div className="flex">
-                            <button className="btn rounded-r-none">Be a Rider</button>
-                            <button className="btn btn-circle rounded-full text-[#CAEB66]">
-                                <FaArrowRight className="-rotate-45" />
-                            </button>
-                        </div>
                     </div>}
 
                 {/* Avatar Dropdown */}
@@ -82,7 +78,6 @@ const NavBar = () => {
                             <div id="nav-links-sm" className="lg:hidden">
                                 {NavLinks}
                             </div>
-                            <li><a>Be a Rider</a></li>
                             <li><a onClick={handleLogOut} className="hover:bg-red-400">Logout</a></li>
                         </ul>
                     </div>
@@ -99,6 +94,9 @@ const NavBar = () => {
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         {NavLinks}
                         <li>
+                            <Link to="/register" className="hover:bg-[#CAEB66] text-black">
+                                Register
+                            </Link>
                             <Link to="/login" className="hover:bg-[#CAEB66] text-black">
                                 Sign in
                             </Link>

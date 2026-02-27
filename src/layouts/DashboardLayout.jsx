@@ -3,10 +3,16 @@ import { Link, NavLink, Outlet } from 'react-router';
 import ZapShiftLogo from '../shared/ZapShiftLogo';
 import { IoMdArrowBack } from 'react-icons/io';
 import { FiUser, FiPackage, FiCreditCard, FiMapPin, FiUsers, FiClock } from 'react-icons/fi';
-import { FaBan } from 'react-icons/fa';
+import { FaBan, FaUserShield } from 'react-icons/fa';
+
+import Loading from '../shared/Loading';
+import useUserRole from '../hooks/useUserRole';
 
 
 const DashboardLayout = () => {
+
+    const { role, loading, error } = useUserRole();
+
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -72,30 +78,45 @@ const DashboardLayout = () => {
                             <FiMapPin className="mr-0.5 font-bold" size={16} /> Track Parcel
                         </NavLink>
                     </li>
-                    <li>
-                        <NavLink
-                            to='/dashboard/active-riders'
-                            className="flex items-center font-bold"
-                        >
-                            <FiUsers className="mr-0.5 font-bold" size={16} /> Active Riders
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to='/dashboard/deactive-riders'
-                            className="flex items-center font-bold"
-                        >
-                            <FaBan className="mr-0.5 font-bold" size={16} /> Deactive Riders
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink
-                            to='/dashboard/pending-riders'
-                            className="flex items-center font-bold"
-                        >
-                            <FiClock className="mr-0.5 font-bold" size={16} /> Pending Riders
-                        </NavLink>
-                    </li>
+
+
+                    {!loading && role==="admin" &&
+                        <>
+                            <li>
+                                <NavLink
+                                    to='/dashboard/active-riders'
+                                    className="flex items-center font-bold"
+                                >
+                                    <FiUsers className="mr-0.5 font-bold" size={16} /> Active Riders
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to='/dashboard/deactive-riders'
+                                    className="flex items-center font-bold"
+                                >
+                                    <FaBan className="mr-0.5 font-bold" size={16} /> Deactive Riders
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to='/dashboard/pending-riders'
+                                    className="flex items-center font-bold"
+                                >
+                                    <FiClock className="mr-0.5 font-bold" size={16} /> Pending Riders
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/make-admin"
+                                    className="flex items-center font-bold"
+                                >
+                                    <FaUserShield className="mr-0.5 font-bold" size={16} />
+                                    All Users
+                                </NavLink>
+                            </li>
+                        </>
+                    }
                 </ul>
             </div>
         </div>

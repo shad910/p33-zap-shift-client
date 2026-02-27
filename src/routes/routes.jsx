@@ -22,6 +22,7 @@ import RidersForm from "../pages/RidersForm";
 import ActiveRiders from "../pages/Dashboard/ActiveRiders";
 import PendingRiders from "../pages/Dashboard/PendingRiders";
 import DeActiveRiders from "../pages/Dashboard/DeactiveRiders";
+import MakeAdmin from "../pages/Dashboard/MakeAdmin";
 
 const router = createBrowserRouter([
   {
@@ -135,6 +136,10 @@ const router = createBrowserRouter([
       {
         path: "pending-riders",
         Component: PendingRiders
+      },
+      {
+        path: "make-admin",
+        Component: MakeAdmin
       }
     ],
 

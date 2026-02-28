@@ -28,6 +28,8 @@ import AdminRoute from "./AdminRoute";
 import RiderRoute from "./RiderRoute"
 import AllotRider from "../pages/Dashboard/AllotRider";
 import PendingDeliveries from "../pages/Dashboard/PendingDeliveries"
+import CompleteDelivery from "../pages/Dashboard/CompleteDelivery";
+import MyEarning from "../pages/Dashboard/MyEarning";
 
 const router = createBrowserRouter([
   {
@@ -139,7 +141,19 @@ const router = createBrowserRouter([
       {
         path: "pending-deliveries",
         element: <RiderRoute>
-          <PendingDeliveries/>
+          <PendingDeliveries />
+        </RiderRoute>
+      },
+      {
+        path: "complete-delivery",
+        element: <RiderRoute>
+          <CompleteDelivery />
+        </RiderRoute>
+      },
+      {
+        path: "my-earnings",
+        element: <RiderRoute>
+          <MyEarning />
         </RiderRoute>
       },
 

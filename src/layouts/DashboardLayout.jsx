@@ -3,7 +3,7 @@ import { Link, NavLink, Outlet } from 'react-router';
 import ZapShiftLogo from '../shared/ZapShiftLogo';
 import { IoMdArrowBack } from 'react-icons/io';
 import { FiUser, FiPackage, FiCreditCard, FiMapPin, FiUsers, FiClock } from 'react-icons/fi';
-import { FaBan, FaUserShield, FaBox } from 'react-icons/fa';
+import { FaBan, FaUserShield, FaBox, FaCheckCircle, FaDollarSign } from 'react-icons/fa';
 import useUserRole from '../hooks/useUserRole';
 
 
@@ -79,17 +79,38 @@ const DashboardLayout = () => {
 
                     {/* Rider Only Route Links */}
                     {!loading && role === "rider" &&
-                        
 
-                    <li>
-                        <NavLink
-                            to="/dashboard/pending-deliveries"
-                            className="flex items-center font-bold"
-                        >
-                            <FaBox className="mr-1" size={16} />
-                            Pending Deliveries
-                        </NavLink>
-                    </li>
+                        <>
+                            <li>
+                                <NavLink
+                                    to="/dashboard/pending-deliveries"
+                                    className="flex items-center font-bold"
+                                >
+                                    <FaBox className="mr-1" size={16} />
+                                    Pending Deliveries
+                                </NavLink>
+                            </li>
+
+                            <li>
+                                <NavLink
+                                    to="/dashboard/complete-delivery"
+                                    className="flex items-center font-bold"
+                                >
+                                    <FaCheckCircle className="mr-1" size={16} />
+                                    Complete Delivery
+                                </NavLink>
+                            </li>
+
+                            <li>
+                                <NavLink
+                                    to="/dashboard/my-earnings"
+                                    className="flex items-center font-bold"
+                                >
+                                    <FaDollarSign className="mr-1" size={16} />
+                                    My Earnings
+                                </NavLink>
+                            </li>
+                        </>
                     }
 
                     {/* Admin Only Route Links */}

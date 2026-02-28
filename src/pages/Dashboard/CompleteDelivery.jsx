@@ -1,11 +1,11 @@
 import React from 'react';
 
-const PendingDeliveries = () => {
+const CompleteDelivery = () => {
     return (
         <div className='text-3xl text-center font-bold m-5'>
-            this is pending delivery page ony for Riders
+            This is complete delivery page only for Riders
         </div>
     );
 };
 
-export default PendingDeliveries;
+export default CompleteDelivery;

@@ -41,7 +41,6 @@ const PaymentHistory = () => {
                         <table className="table table-zebra table-fixed w-full">
                             <thead>
                                 <tr>
-                                    <th className="w-16">#</th>
                                     <th className="w-24">Parcel ID</th>
                                     <th className="w-28">Title</th>
                                     <th className="w-24">Sender</th>
@@ -53,9 +52,8 @@ const PaymentHistory = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {payments.map((payment, index) => (
-                                    <tr key={payment._id}>
-                                        <td>{index + 1}</td>
+                                {payments.map((payment) => (
+                                    <tr key={payment._id} className='hover:bg-base-300'>
                                         <td className="truncate overflow-visible">
                                             <div
                                                 className="tooltip tooltip-top inline-block cursor-pointer z-50"

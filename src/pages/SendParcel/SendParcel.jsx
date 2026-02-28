@@ -28,6 +28,7 @@ const SendParcel = () => {
       parcelType: "document",
       senderName: user?.displayName || "anonymous",
       paymentStatus: "unpaid",
+      deliveryStatus: "uncollected"
     },
   });
 

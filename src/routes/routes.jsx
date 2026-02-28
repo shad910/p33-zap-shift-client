@@ -6,7 +6,7 @@ import RootLayout from "../layouts/RootLayout";
 import Home from "../pages/Home/Home";
 import Coverage from "../pages/Coverage/Coverage";
 import SendParcel from "../pages/SendParcel/SendParcel";
-import AboutUs from "../shared/AboutUs";
+import AboutUs from "../pages/AboutUs";
 import AuthLayout from "../layouts/AuthLayout";
 import Register from "../pages/authentication/Register";
 import Verification from "../pages/authentication/Verification";
@@ -23,6 +23,11 @@ import ActiveRiders from "../pages/Dashboard/ActiveRiders";
 import PendingRiders from "../pages/Dashboard/PendingRiders";
 import DeActiveRiders from "../pages/Dashboard/DeactiveRiders";
 import MakeAdmin from "../pages/Dashboard/MakeAdmin";
+import Forbidden from "../shared/Forbidden";
+import AdminRoute from "./AdminRoute";
+import RiderRoute from "./RiderRoute"
+import AllotRider from "../pages/Dashboard/AllotRider";
+import PendingDeliveries from "../pages/Dashboard/PendingDeliveries"
 
 const router = createBrowserRouter([
   {
@@ -64,6 +69,10 @@ const router = createBrowserRouter([
       {
         path: "about-us",
         Component: AboutUs
+      },
+      {
+        path: "forbidden",
+        Component: Forbidden
       }
     ],
   },
@@ -97,7 +106,7 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <PrivateRoute>
-      <DashboardLayout></DashboardLayout>
+      <DashboardLayout />
     </PrivateRoute>,
     errorElement: <Error />,
     children: [
@@ -125,21 +134,45 @@ const router = createBrowserRouter([
         path: "track-parcel",
         Component: TrackParcel
       },
+
+      // Rider Only Routes
+      {
+        path: "pending-deliveries",
+        element: <RiderRoute>
+          <PendingDeliveries/>
+        </RiderRoute>
+      },
+
+      // Admin Only Routes
+      {
+        path: "assign-rider",
+        element: <AdminRoute>
+          <AllotRider />
+        </AdminRoute>
+      },
       {
         path: "active-riders",
-        Component: ActiveRiders
+        element: <AdminRoute>
+          <ActiveRiders />
+        </AdminRoute>
       },
       {
         path: "deActive-riders",
-        Component: DeActiveRiders
+        element: <AdminRoute>
+          <DeActiveRiders />
+        </AdminRoute>
       },
       {
         path: "pending-riders",
-        Component: PendingRiders
+        element: <AdminRoute>
+          <PendingRiders />
+        </AdminRoute>
       },
       {
         path: "make-admin",
-        Component: MakeAdmin
+        element: <AdminRoute>
+          <MakeAdmin />
+        </AdminRoute>
       }
     ],
 

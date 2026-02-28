@@ -3,15 +3,13 @@ import { Link, NavLink, Outlet } from 'react-router';
 import ZapShiftLogo from '../shared/ZapShiftLogo';
 import { IoMdArrowBack } from 'react-icons/io';
 import { FiUser, FiPackage, FiCreditCard, FiMapPin, FiUsers, FiClock } from 'react-icons/fi';
-import { FaBan, FaUserShield } from 'react-icons/fa';
-
-import Loading from '../shared/Loading';
+import { FaBan, FaUserShield, FaBox } from 'react-icons/fa';
 import useUserRole from '../hooks/useUserRole';
 
 
 const DashboardLayout = () => {
 
-    const { role, loading, error } = useUserRole();
+    const { role, loading } = useUserRole();
 
     return (
         <div className="drawer lg:drawer-open">
@@ -79,9 +77,34 @@ const DashboardLayout = () => {
                         </NavLink>
                     </li>
 
+                    {/* Rider Only Route Links */}
+                    {!loading && role === "rider" &&
+                        
 
-                    {!loading && role==="admin" &&
+                    <li>
+                        <NavLink
+                            to="/dashboard/pending-deliveries"
+                            className="flex items-center font-bold"
+                        >
+                            <FaBox className="mr-1" size={16} />
+                            Pending Deliveries
+                        </NavLink>
+                    </li>
+                    }
+
+                    {/* Admin Only Route Links */}
+                    {!loading && role === "admin" &&
                         <>
+
+                            <li>
+                                <NavLink
+                                    to="/dashboard/assign-rider"
+                                    className="flex items-center font-bold"
+                                >
+                                    <FaUserShield className="mr-0.5 font-bold" size={16} />
+                                    Assign Rider
+                                </NavLink>
+                            </li>
                             <li>
                                 <NavLink
                                     to='/dashboard/active-riders'

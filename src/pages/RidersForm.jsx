@@ -37,6 +37,7 @@ const RidersForm = () => {
             bikeBrand: "",
             bikeReg: "",
             about: "",
+            workStatus: "free"
         },
     });
 

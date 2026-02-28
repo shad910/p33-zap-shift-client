@@ -72,7 +72,6 @@ const MyParcels = () => {
                     <table className="table table-zebra w-full text-[10px] sm:text-xs md:text-sm lg:text-base">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Parcel Name</th>
                                 <th className="hidden sm:table-cell">Type</th>
                                 <th>Created at</th>
@@ -81,9 +80,8 @@ const MyParcels = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {myParcels.map((parcel, index) => (
+                            {myParcels.map((parcel) => (
                                 <tr key={parcel._id} className="hover:bg-base-300">
-                                    <th>{index + 1}</th>
                                     <td>{parcel.parcelTitle}</td>
                                     <td className="hidden sm:table-cell">{parcel.parcelType}</td>
                                     <td>{new Date(parcel.creation_date).toLocaleString("en-GB", {

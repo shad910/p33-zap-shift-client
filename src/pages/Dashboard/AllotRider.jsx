@@ -100,7 +100,7 @@ const AllotRider = () => {
             <div className="bg-base-100 shadow rounded-lg overflow-hidden">
 
                 {/* Desktop Table */}
-                <div className="hidden md:block overflow-x-auto">
+                <div className="hidden lg:block overflow-x-auto">
 
                     <table className="table w-full">
 
@@ -209,7 +209,7 @@ const AllotRider = () => {
 
 
                 {/* Mobile Cards */}
-                <div className="md:hidden space-y-4 p-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:hidden space-y-4 p-3">
 
                     {
                         parcels.map(parcel => (
@@ -255,90 +255,124 @@ const AllotRider = () => {
 
             {/* Modal */}
             <dialog id="assign_rider_modal" className="modal">
+                <div className="modal-box max-w-5xl">
 
-                <div className="modal-box max-w-xl">
+                    <h3 className="font-bold text-lg mb-4">Assign Rider</h3>
 
-                    <h3 className="font-bold text-lg mb-4">
-                        Assign Rider
-                    </h3>
+                    {availableRiders.length > 0 ? (
+                        <>
+                            {/* Card Layout (mobile + md) */}
+                            <div className="space-y-3 lg:hidden">
+                                {availableRiders.map((rider) => {
 
-                    {
-                        availableRiders.length > 0
-                            ?
-                            availableRiders.map((rider) => {
+                                    const workStatus = rider.workStatus || "free";
+                                    const isBusy = workStatus === "in-delivery";
 
-                                const workStatus = rider.workStatus || "free";
-                                const isBusy = workStatus === "in-delivery";
+                                    return (
+                                        <div
+                                            key={rider._id}
+                                            className="border p-4 rounded-lg flex justify-between items-center"
+                                        >
+                                            <div>
+                                                <p className="font-semibold">{rider.name}</p>
 
-                                return (
+                                                <p className="text-xs">{rider.email}</p>
 
-                                    <div
-                                        key={rider._id}
-                                        className="flex justify-between items-center border p-3 rounded-lg mb-2"
-                                    >
+                                                <p className="text-sm text-gray-500">
+                                                    {rider.district}, {rider.region}
+                                                </p>
 
-                                        <div>
 
-                                            <p className="font-semibold">
-                                                {rider.name}
-                                            </p>
 
-                                            <p className="text-sm text-gray-500">
-                                                {rider.district}, {rider.region}
-                                            </p>
+                                                <span
+                                                    className={`badge badge-sm mt-1 ${isBusy ? "badge-error" : "badge-success"
+                                                        }`}
+                                                >
+                                                    {isBusy ? "In Delivery" : "Free"}
+                                                </span>
+                                            </div>
 
-                                            <p className="text-xs">
-                                                {rider.email}
-                                            </p>
-
-                                            {/* Work Status Badge */}
-                                            <span
-                                                className={`badge badge-sm mt-1 ${isBusy
-                                                    ? "badge-error"
-                                                    : "badge-success"
+                                            <button
+                                                onClick={() => handleAssignRider(rider)}
+                                                disabled={isBusy}
+                                                className={`btn btn-sm ${isBusy ? "btn-disabled cursor-not-allowed" : "btn-success"
                                                     }`}
                                             >
-                                                {workStatus === "in-delivery" ? "In Delivery" : "Free"}
-                                            </span>
-
+                                                {isBusy ? "Busy" : "Assign"}
+                                            </button>
                                         </div>
+                                    );
+                                })}
+                            </div>
 
-                                        <button
-                                            onClick={() => handleAssignRider(rider)}
-                                            disabled={isBusy}
-                                            className={`btn btn-sm ${isBusy
-                                                ? "btn-disabled cursor-not-allowed"
-                                                : "btn-success"
-                                                }`}
-                                        >
-                                            {
-                                                isBusy
-                                                    ? "Busy"
-                                                    : "Assign"
-                                            }
-                                        </button>
+                            {/* Table Layout (lg and up) */}
+                            <div className="hidden lg:block overflow-x-auto">
+                                <table className="table table-zebra">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Location</th>
+                                            <th>Status</th>
+                                            <th>Assign</th>
+                                        </tr>
+                                    </thead>
 
-                                    </div>
+                                    <tbody>
+                                        {availableRiders.map((rider) => {
 
-                                );
+                                            const workStatus = rider.workStatus || "free";
+                                            const isBusy = workStatus === "in-delivery";
 
-                            })
-                            :
-                            <p className="text-gray-500">
-                                No available riders
-                            </p>
-                    }
+                                            return (
+                                                <tr key={rider._id}>
+                                                    <td className="font-semibold">{rider.name}</td>
+
+                                                    <td className="text-sm">{rider.email}</td>
+
+                                                    <td>
+                                                        {rider.district}, {rider.region}
+                                                    </td>
+
+                                                    <td>
+                                                        <span
+                                                            className={`badge badge-sm ${isBusy ? "badge-error" : "badge-success"
+                                                                }`}
+                                                        >
+                                                            {isBusy ? "In Delivery" : "Free"}
+                                                        </span>
+                                                    </td>
+
+                                                    <td>
+                                                        <button
+                                                            onClick={() => handleAssignRider(rider)}
+                                                            disabled={isBusy}
+                                                            className={`btn btn-xs ${isBusy
+                                                                ? "btn-disabled cursor-not-allowed"
+                                                                : "btn-success"
+                                                                }`}
+                                                        >
+                                                            {isBusy ? "Busy" : "Assign"}
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </>
+                    ) : (
+                        <p className="text-gray-500">No available riders</p>
+                    )}
 
                     <div className="modal-action">
-
                         <form method="dialog">
                             <button className="btn">Close</button>
                         </form>
-
                     </div>
 
                 </div>
-
             </dialog>
 
         </section>
